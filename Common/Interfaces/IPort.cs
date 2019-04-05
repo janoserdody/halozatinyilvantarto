@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BusinessLayer.Interfaces
+{
+    public interface IPort
+    {
+        int ItemID { get; set; }
+
+        int PortNumber { get; set; }
+
+        string PortID { get; set; }
+
+        string PortName { get; set; }
+
+        string PortPhysicalType { get; set; }
+
+        int SymbolID { get; set; }
+
+        string PhysicalLocation { get; set;}
+    }
+}

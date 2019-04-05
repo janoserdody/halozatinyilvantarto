@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Drawing;
+
+namespace BusinessLayer.Interfaces
+{
+    public interface ISymbol
+    {
+        int Id { get; set; }
+
+        string Name { get; }
+
+        Image Image { get; set; }
+    }
+}
