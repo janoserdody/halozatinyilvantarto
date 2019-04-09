@@ -1,8 +1,8 @@
-﻿using BusinessLayer.Interfaces;
+﻿using Common.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BusinessLayer
+namespace Common
 {
     public class RegisterActive : IRegisterActive
     {

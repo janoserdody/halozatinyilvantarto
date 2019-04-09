@@ -1,11 +1,11 @@
-﻿using BusinessLayer.Interfaces;
-using BusinessLayer.Support;
-using BusinessLayer.Support._interfaces;
+﻿using Common.Interfaces;
+using Common.Support;
+using Common.Support._interfaces;
 using DataLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace BusinessLayer
+namespace Common
 {
     public class FrameWork : IFrameWork
     {

@@ -1,8 +1,8 @@
-﻿using BusinessLayer.Interfaces;
+﻿using Common.Interfaces;
 using System;
-using BusinessLayer.Models;
+using Common.Models;
 
-namespace BusinessLayer.Interfaces
+namespace Common.Interfaces
 {
     public interface IFrameWork
     {

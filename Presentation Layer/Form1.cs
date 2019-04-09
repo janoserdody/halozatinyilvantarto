@@ -3,10 +3,10 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using LiteDB;
-using BusinessLayer.Support._interfaces;
-using BusinessLayer.Interfaces;
-using BusinessLayer;
-using BusinessLayer.Models;
+using Common.Support._interfaces;
+using Common.Interfaces;
+using Common;
+using Common.Models;
 
 namespace PresentationLayer
 {
@@ -72,6 +72,19 @@ namespace PresentationLayer
             //példa:  egy eszközt lekér
             IItemActive item4 = frameWork.GetItemActive(itemId2);
             MessageBox.Show("lekérve: eszköz neve: " + item4.DeviceName);
+
+            // példa: lekéri a GetService() -vel az IErrorservice szervízt
+            // utána megjeleníti a hibaüzenetet
+
+            IErrorService errorService = (IErrorService)(frameWork.GetService(typeof(IErrorService)));
+
+            if (errorService == null)
+            {
+                throw new Exception("Hibás ErrorService!");
+            }
+
+            IError error = new Error(ErrorType.InputError, "Beviteli hiba");
+            errorService.Write(error);
 
             this.Focus();
         }

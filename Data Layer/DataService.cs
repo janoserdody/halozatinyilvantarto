@@ -9,19 +9,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Common.Models;
-using BusinessLayer.Interfaces;
-using BusinessLayer.Models;
-using BusinessLayer;
+using Common.Interfaces;
+using Common.Models;
+using Common;
 
 namespace DataLayer
 {
-    public class DataService : IDataService
+    public class DataServiceProvider : IDataService
     {
         private bool isMySQL;
         private LiteRepository repo;
         private IErrorService errorService;
 
-        public DataService(bool isMySQL, LiteRepository repo, IErrorService errorService)
+        public DataServiceProvider(bool isMySQL, LiteRepository repo, IErrorService errorService)
         {
             this.isMySQL = isMySQL;
             this.repo = repo;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Serilog;
 
-namespace BusinessLayer.Interfaces
+namespace Common.Interfaces
 {
     public interface ILogService
     {
