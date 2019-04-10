@@ -4,10 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Interfaces;
-using Common.Models;
+using BusinessLayer.Interfaces;
+using BusinessLayer.Models;
 
-namespace Common
+namespace BusinessLayer
 {
     public static class Validator<T>
     {

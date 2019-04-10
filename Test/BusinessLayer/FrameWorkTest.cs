@@ -1,9 +1,9 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Common;
+using BusinessLayer;
 using DataLayer.Interfaces;
-using Common.Interfaces;
-using Common.Models;
+using BusinessLayer.Interfaces;
+using BusinessLayer.Models;
 
 namespace Test.BusinessLayer
 {

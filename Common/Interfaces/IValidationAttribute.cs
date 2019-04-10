@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Models;
+using BusinessLayer.Models;
 
-namespace Common.Interfaces
+namespace BusinessLayer.Interfaces
 {
     interface IValidationAttribute<T>
     {

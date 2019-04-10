@@ -8,7 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{10098F7D-E3AC-41B2-B1EC-C1AB9285EBF8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Business_Layer</RootNamespace>
+    <RootNamespace>BusinessLayer</RootNamespace>
     <AssemblyName>Business Layer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -85,6 +85,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterActive.cs" />
+    <Compile Include="RegisterConnection.cs" />
+    <Compile Include="RegisterPortActive.cs" />
     <Compile Include="UISupport\UIFactory.cs" />
     <Compile Include="UISupport\_interfaces\IUIFactory.cs" />
     <Compile Include="UserService.cs" />

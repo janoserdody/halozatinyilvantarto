@@ -1,11 +1,11 @@
-﻿using Common.Interfaces;
+﻿using BusinessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Models
+namespace BusinessLayer.Models
 {
     public class ItemActive : IItemActive
     {
@@ -15,7 +15,8 @@ namespace Common.Models
         private string deviceID;
         private string deviceName;
         private string notes;
-
+        private IList<int> portNumberList = new List<int>();
+        
         // adatbázisból lekérni az eltárolt item id-ját
         // ha id = 0, akkor el kell tárolni az adatbázisba
         public int Id { get => id; set => id = value; } 
@@ -40,6 +41,11 @@ namespace Common.Models
             set => notes = value;
         }
 
+        public IList<int> PortNumberList {
+            get => portNumberList;
+            set => portNumberList = value;
+        }
+
         public IError AddConnection(IConnection connection)
         {
             throw new NotImplementedException();
@@ -47,8 +53,18 @@ namespace Common.Models
 
         public IError AddPort(IPortActive port)
         {
-            throw new NotImplementedException();
+            IError error = NoError();
+            if (portNumberList.Count > 0 && portNumberList.Contains(port.PortNumber))
+            {
+            error = Helpers.ErrorMessage(ErrorType.NoUniqueID,
+                    "Már létezik ilyen sorszámú port");
+            }
+            portNumberList.Add(port.PortNumber);
+
+            return error;
         }
+
+        
 
         public IItemActive Clone(int id)
         {
@@ -66,12 +82,7 @@ namespace Common.Models
             throw new NotImplementedException();
         }
 
-        public IPortActive GetPort(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<int> GetPortsIDList()
+        public IList<int> GetPortsNumberList()
         {
             throw new NotImplementedException();
         }
@@ -91,9 +102,19 @@ namespace Common.Models
             throw new NotImplementedException();
         }
 
-        public IError RemovePort(int id)
+        public IPortActive GetPort(int number)
         {
             throw new NotImplementedException();
+        }
+
+        public IError RemovePort(int number)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static IError NoError()
+        {
+            return Helpers.ErrorMessage(ErrorType.NoError);
         }
     }
 }

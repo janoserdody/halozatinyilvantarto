@@ -1,51 +1,55 @@
-﻿using BusinessLayer.Interfaces;
+﻿using BusinessLayer;
+using BusinessLayer.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class RegisterActive : IRegisterActive
+    public class RegisterPortActive : IRegisterPortActive
     {
         private ILogService logService;
         private IErrorService errorService;
-        private IList<IItemActive> itemList;
+        private IList<IPortActive> portList;
 
-        public RegisterActive(ILogService logService, IErrorService errorService)
+        public RegisterPortActive(ILogService logService, IErrorService errorService)
         {
             this.logService = logService;
             this.errorService = errorService;
-            itemList = new List<IItemActive>();
+            portList = new List<IPortActive>();
         }
 
-        IItemActive IRegisterActive.this[int ID]
+        IPortActive IRegisterPortActive.this[int ItemId, int portNumber]
         {
             get
             {
-                if (itemList.Count > 0)
+                if (portList.Count > 0)
                 {
-                    return itemList.Where(x => x.Id == ID).FirstOrDefault();
+                    return portList.Where(x => x.ItemID == ItemId).FirstOrDefault();
                 }
                 return null;
             }
         }
 
-        bool IRegisterActive.Add(IItemActive item)
+        bool IRegisterPortActive.Add(IPortActive port)
         {
             // TODO hibakezelés, ellenőrizni, megfelelő értékeket tartalmaz
             // a ItemActive
 
             bool ok = true;
 
-            itemList.Add(item);
+            portList.Add(port);
 
             return ok;
         }
 
-        bool IRegisterActive.Remove(IItemActive item)
+        bool IRegisterPortActive.Remove(IPortActive port)
         {
             bool ok = false;
             // TODO: van e connection
-            if (itemList.Remove(item))
+            if (portList.Remove(port))
             {
                 ok = true;
 
@@ -54,7 +58,7 @@ namespace BusinessLayer
             else
             {
                 IError error = Helpers.ErrorMessage(ErrorType.NoUniqueID,
-                    "Nem létezik ilyen item");
+                    "Nem létezik ilyen port");
 
                 errorService.Write(error);
 
@@ -62,14 +66,13 @@ namespace BusinessLayer
             }
         }
 
-        bool IRegisterActive.Remove(int id)
+        bool IRegisterPortActive.Remove(int itemId, int portNumber)
         {
             bool ok = false;
-            // TODO: van e connection
-            int index = GetIndex(id);
+            int index = GetIndex(itemId, portNumber);
             if (index >= 0)
             {
-                itemList.RemoveAt(index);
+                portList.RemoveAt(index);
 
                 ok = true;
 
@@ -78,16 +81,16 @@ namespace BusinessLayer
             else
             {
                 IError error = Helpers.ErrorMessage(ErrorType.NoUniqueID,
-                    "Nem létezik ilyen item");
+                    "Nem létezik ilyen port");
 
                 errorService.Write(error);
 
                 return ok;
             }
         }
-        private int GetIndex(int ID)
+        private int GetIndex(int ItemId, int portNumber)
         {
-            return itemList.IndexOf(itemList.Where(x => x.Id == ID).FirstOrDefault());
+            return portList.IndexOf(portList.Where(x => x.ItemID == ItemId && x.PortNumber == portNumber).FirstOrDefault());
         }
     }
 }

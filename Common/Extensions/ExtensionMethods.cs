@@ -6,7 +6,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Extensions
+namespace BusinessLayer.Extensions
 {
     public static class ExtensionMethods
     {

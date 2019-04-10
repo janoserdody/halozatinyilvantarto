@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Common.Support._interfaces
+namespace BusinessLayer.Support._interfaces
 {
     public interface IUIFactory
     {

@@ -1,11 +1,11 @@
-﻿using Common.Interfaces;
+﻿using BusinessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Interfaces
+namespace BusinessLayer.Interfaces
 {
     public interface IRegisterActive
     {

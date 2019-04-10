@@ -1,12 +1,12 @@
-﻿using Common.Interfaces;
-using Common.Models;
-using Common;
-using Common.Extensions;
-using Common.Models;
+﻿using BusinessLayer.Interfaces;
+using BusinessLayer.Models;
+using BusinessLayer;
+using BusinessLayer.Extensions;
+using BusinessLayer.Models;
 using DataLayer.Interfaces;
 using Serilog;
 
-namespace Common
+namespace BusinessLayer
 {
     public class UserService : IUserService
     {

@@ -1,17 +1,12 @@
-﻿using Common;
-using Common.Interfaces;
+﻿using BusinessLayer;
+using BusinessLayer.Interfaces;
+using BusinessLayer.Models;
 using DataLayer.Interfaces;
 using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using Common.Models;
-using Common.Interfaces;
-using Common.Models;
-using Common;
+
 
 namespace DataLayer
 {
@@ -57,6 +52,11 @@ namespace DataLayer
             }
 
             return result;
+        }
+
+        IItemActive IDataService.GetItemActive(int id)
+        {
+            return repo.Query<ItemActive>().Where(x => x.Id == id).SingleOrDefault();
         }
 
         /// <summary>
@@ -114,12 +114,6 @@ namespace DataLayer
             return repo.Delete<User>(u => u.Id == user.Id) > 0;
         }
 
-
-        IItemActive IDataService.GetItemActive(int id)
-        {
-            return repo.Query<ItemActive>().Where(x => x.Id == id).SingleOrDefault();
-        }
-
         IError IDataService.DeleteConnection(IConnection connection)
         {
             throw new NotImplementedException();
@@ -162,12 +156,20 @@ namespace DataLayer
 
         IList<IConnection> IDataService.GetConnection()
         {
-            throw new NotImplementedException();
+            IList<IConnection> result = new List<IConnection>();
+
+            var result2 = repo.Query<Connection>().ToList();
+            foreach (var item in result2)
+            {
+                result.Add(item);
+            }
+
+            return result;
         }
 
         IConnection IDataService.GetConnection(int id)
         {
-            throw new NotImplementedException();
+            return repo.Query<Connection>().Where(x => x.Id == id).SingleOrDefault();
         }
 
         IList<IConnectorWall> IDataService.GetConnectorWall()
@@ -204,12 +206,20 @@ namespace DataLayer
 
         IList<IPortActive> IDataService.GetPortActive()
         {
-            throw new NotImplementedException();
+            IList<IPortActive> result = new List<IPortActive>();
+
+            var result2 = repo.Query<PortActive>().ToList();
+            foreach (var item in result2)
+            {
+                result.Add(item);
+            }
+
+            return result;
         }
 
-        IPortActive IDataService.GetPortActive(int id)
+        IPortActive IDataService.GetPortActive(int itemId, int portNumber)
         {
-            throw new NotImplementedException();
+            return repo.Query<PortActive>().Where(x => x.ItemID == itemId && x.PortNumber == portNumber).SingleOrDefault();
         }
 
         IList<IPortPassive> IDataService.GetPortPassive()
@@ -217,24 +227,45 @@ namespace DataLayer
             throw new NotImplementedException();
         }
 
-        IPortPassive IDataService.GetPortPassive(int id)
+        IPortPassive IDataService.GetPortPassive(int itemId, int portNumber)
         {
             throw new NotImplementedException();
         }
 
         IList<ISymbol> IDataService.GetSymbol()
         {
-            throw new NotImplementedException();
+            IList<ISymbol> result = new List<ISymbol>();
+
+            var result2 = repo.Query<Symbol>().ToList();
+            foreach (var item in result2)
+            {
+                result.Add(item);
+            }
+
+            return result;
         }
 
         ISymbol IDataService.GetSymbol(int id)
         {
-            throw new NotImplementedException();
+            return repo.Query<Symbol>().Where(s => s.Id == id).SingleOrDefault();
         }
 
         IError IDataService.InsertConnection(IConnection connection)
         {
-            throw new NotImplementedException();
+            IError error = ErrorInit();
+
+            try
+            {
+                repo.Insert((Connection)connection);
+                return error;
+            }
+            catch (Exception ex)
+            {
+                error = Helpers.ErrorMessage(ErrorType.NoUniqueID,
+                    ex.Message);
+                errorService.Write(error);
+                return error;
+            }
         }
 
         IError IDataService.InsertConnectorWall(IConnectorWall connector)
@@ -261,7 +292,20 @@ namespace DataLayer
 
         IError IDataService.InsertPortActive(IPortActive port)
         {
-            throw new NotImplementedException();
+            IError error = ErrorInit();
+
+            try
+            {
+                repo.Insert((PortActive)port);
+                return error;
+            }
+            catch (Exception ex)
+            {
+                error = Helpers.ErrorMessage(ErrorType.NoUniqueID,
+                    ex.Message);
+                errorService.Write(error);
+                return error;
+            }
         }
 
         IError IDataService.InsertPortPassive(IPortPassive port)
@@ -271,7 +315,20 @@ namespace DataLayer
 
         IError IDataService.InsertSymbol(ISymbol symbol)
         {
-            throw new NotImplementedException();
+            IError error = ErrorInit();
+
+            try
+            {
+                repo.Insert((Symbol)symbol);
+                return error;
+            }
+            catch (Exception ex)
+            {
+                error = Helpers.ErrorMessage(ErrorType.NoUniqueID,
+                    ex.Message);
+                errorService.Write(error);
+                return error;
+            }
         }
 
         IError IDataService.UpdateConnection(IConnection connection)
@@ -286,7 +343,19 @@ namespace DataLayer
 
         IError IDataService.UpdateItemActive(IItemActive item)
         {
-            throw new NotImplementedException();
+            IError error = ErrorInit();
+            try
+            {
+                repo.Update((ItemActive)item);
+                return error;
+            }
+            catch (Exception ex)
+            {
+                error = Helpers.ErrorMessage(ErrorType.DatabaseError,
+                    ex.Message);
+                errorService.Write(error);
+                return error;
+            }
         }
 
         IError IDataService.UpdateItemPassive(IItemPassive item)

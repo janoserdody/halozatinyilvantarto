@@ -1,4 +1,4 @@
-﻿using Common.Support._interfaces;
+﻿using BusinessLayer.Support._interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Common.Support
+namespace BusinessLayer.Support
 {
     public class UIFactory : IUIFactory
     {
@@ -47,20 +47,21 @@ namespace Common.Support
         private Button BlueButton(Button button)
         {
             button.BackColor = System.Drawing.Color.Blue;
+            button.ForeColor = System.Drawing.Color.White;
             GetDefaultButton(button);
-
             return button;
         }
 
         private Button RedButton(Button button)
         {
             button.BackColor = System.Drawing.Color.Red;
+            button.ForeColor = System.Drawing.Color.White;
             return button;
         }
 
         private void GetDefaultButton(Button button)
         {
-            button.Size = new System.Drawing.Size(75, 23);
+            button.Size = new System.Drawing.Size(150, 30);
             button.UseVisualStyleBackColor = false;
         }
     }

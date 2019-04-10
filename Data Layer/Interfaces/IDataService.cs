@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Interfaces;
-using Common.Models;
-using Common.Interfaces;
-using Common.Models;
+using BusinessLayer.Interfaces;
+using BusinessLayer.Models;
+using BusinessLayer.Interfaces;
+using BusinessLayer.Models;
 
 namespace DataLayer.Interfaces
 {
@@ -91,9 +91,9 @@ namespace DataLayer.Interfaces
 
         IList<ISymbol> GetSymbol();
 
-        IPortActive GetPortActive(int id);
+        IPortActive GetPortActive(int itemId, int portNumber);
 
-        IPortPassive GetPortPassive(int id);
+        IPortPassive GetPortPassive(int itemId, int portNumber);
 
         IConnection GetConnection(int id);
 

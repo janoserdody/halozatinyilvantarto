@@ -1,11 +1,11 @@
-﻿using Common.Models;
+﻿using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Interfaces
+namespace BusinessLayer.Interfaces
 {
     public interface  IItemActive : IItem
     {
@@ -13,14 +13,14 @@ namespace Common.Interfaces
         /// Get the list of IDs of ports
         /// </summary>
         /// <returns></returns>
-        IList<int> GetPortsIDList();
+        IList<int> GetPortsNumberList();
 
         IError AddPort(IPortActive port);
 
         IError RemovePort(IPortActive port);
 
-        IPortActive GetPort(int id);
+        IPortActive GetPort(int number);
 
-        IError RemovePort(int id);
+        IError RemovePort(int number);
     }
 }

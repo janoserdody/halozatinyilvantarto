@@ -1,4 +1,4 @@
-﻿namespace Business_Layer.DrawingModule
+﻿namespace BusinessLayer.DrawingModule
 {
     using System;
     using System.Collections.Generic;
@@ -73,7 +73,7 @@
             return path.ToList();
         }
 
-        public static void Main()
+        public static void DrawingModule()
         {
 
             // Hálózati elemek

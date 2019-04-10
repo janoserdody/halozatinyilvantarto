@@ -1,11 +1,12 @@
-﻿using Common.Interfaces;
-using Common.Support;
-using Common.Support._interfaces;
+﻿using BusinessLayer;
+using BusinessLayer.Interfaces;
+using BusinessLayer.Support;
+using BusinessLayer.Support._interfaces;
 using DataLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace Common
+namespace BusinessLayer
 {
     public class FrameWork : IFrameWork
     {
@@ -13,6 +14,7 @@ namespace Common
         private ILogService logService;
         private IErrorService errorService;
         private IRegisterActive registerActive;
+        private IRegisterPortActive registerPortActive;
         private IUIFactory uiFactory;
         IUserService userService;
         IError error;
@@ -25,6 +27,7 @@ namespace Common
             this.errorService = errorService;
             this.userService = userService;
             registerActive = new RegisterActive(logService, errorService);
+            registerPortActive = new RegisterPortActive(logService, errorService);
             uiFactory = new UIFactory();
         }
 
@@ -146,7 +149,31 @@ namespace Common
 
         bool IFrameWork.AddPortActive(int itemID, IPortActive portActive)
         {
-            throw new NotImplementedException();
+            // TODO: ha frissíti az activeItem port listáját, akkor kell frissíteni az adatbázisban az item adatait
+            bool ok = false;
+
+            string message;
+
+            IError error = dataService.InsertPortActive(portActive);
+
+            if (!error.IsError)
+            {
+                message = "Aktív port elmentve " + portActive.PortID;
+                ok = true;
+                registerPortActive.Add(portActive);
+                registerActive[itemID].AddPort(portActive);
+                message += error.Message;
+                error = dataService.UpdateItemActive(registerActive[itemID]);
+                message += error.Message;
+            }
+            else
+            {
+                message = error.Message;
+            }
+
+            logService.Create(message);
+
+            return ok;
         }
 
         bool IFrameWork.AddPortPassive(int itemID, IPortPassive portPassive)

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Interfaces;
+using BusinessLayer.Interfaces;
 
-namespace Common.Models
+namespace BusinessLayer.Models
 {
     public class LocationType
     {

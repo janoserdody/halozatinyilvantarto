@@ -1,51 +1,56 @@
-﻿using BusinessLayer.Interfaces;
+﻿using BusinessLayer;
+using BusinessLayer.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class RegisterActive : IRegisterActive
+    public class RegisterConnection : IRegisterConnection
     {
         private ILogService logService;
         private IErrorService errorService;
-        private IList<IItemActive> itemList;
+        private IList<IConnection> connectionList;
 
-        public RegisterActive(ILogService logService, IErrorService errorService)
+        public RegisterConnection(ILogService logService, IErrorService errorService)
         {
             this.logService = logService;
             this.errorService = errorService;
-            itemList = new List<IItemActive>();
+            connectionList = new List<IConnection>();
         }
-
-        IItemActive IRegisterActive.this[int ID]
+        IConnection IRegisterConnection.this[int ID]
         {
             get
             {
-                if (itemList.Count > 0)
+                if (connectionList.Count > 0)
                 {
-                    return itemList.Where(x => x.Id == ID).FirstOrDefault();
+                    return connectionList.Where(x => x.Id == ID).FirstOrDefault();
                 }
                 return null;
             }
         }
 
-        bool IRegisterActive.Add(IItemActive item)
+        
+
+        bool IRegisterConnection.Add(IConnection connection)
         {
             // TODO hibakezelés, ellenőrizni, megfelelő értékeket tartalmaz
-            // a ItemActive
+            // a IConnection
 
             bool ok = true;
 
-            itemList.Add(item);
+            connectionList.Add(connection);
 
             return ok;
         }
 
-        bool IRegisterActive.Remove(IItemActive item)
+        bool IRegisterConnection.Remove(IConnection connection)
         {
             bool ok = false;
             // TODO: van e connection
-            if (itemList.Remove(item))
+            if (connectionList.Remove(connection))
             {
                 ok = true;
 
@@ -54,7 +59,7 @@ namespace BusinessLayer
             else
             {
                 IError error = Helpers.ErrorMessage(ErrorType.NoUniqueID,
-                    "Nem létezik ilyen item");
+                    "Nem létezik ilyen kapcsolat");
 
                 errorService.Write(error);
 
@@ -62,14 +67,14 @@ namespace BusinessLayer
             }
         }
 
-        bool IRegisterActive.Remove(int id)
+        bool IRegisterConnection.Remove(int id)
         {
             bool ok = false;
             // TODO: van e connection
             int index = GetIndex(id);
             if (index >= 0)
             {
-                itemList.RemoveAt(index);
+                connectionList.RemoveAt(index);
 
                 ok = true;
 
@@ -78,16 +83,17 @@ namespace BusinessLayer
             else
             {
                 IError error = Helpers.ErrorMessage(ErrorType.NoUniqueID,
-                    "Nem létezik ilyen item");
+                    "Nem létezik ilyen kapcsolat");
 
                 errorService.Write(error);
 
                 return ok;
             }
         }
+
         private int GetIndex(int ID)
         {
-            return itemList.IndexOf(itemList.Where(x => x.Id == ID).FirstOrDefault());
+            return connectionList.IndexOf(connectionList.Where(x => x.Id == ID).FirstOrDefault());
         }
     }
 }

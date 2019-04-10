@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Interfaces
+namespace BusinessLayer.Interfaces
 {
     public interface IPort
     {
+        int Id { get; set; }
         int ItemID { get; set; }
 
         int PortNumber { get; set; }

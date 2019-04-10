@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Interfaces;
+using BusinessLayer.Interfaces;
 
-namespace Common
+namespace BusinessLayer
 {
     public class PortActive : IPortActive
     {
+        private int id;
         private string ipAddress;
         private string macAddress;
         private string activeTypeName;
@@ -21,52 +22,54 @@ namespace Common
         private int symbolID;
         private string physicalLocation;
 
-        string IPortActive.MacAddress
+        public int Id { get => id; set => id = value; }
+
+        public string MacAddress
         {
             get => macAddress;
             set => macAddress = value;
         }
-        string IPortActive.IPAddress
+        public string IPAddress
         {
             get => ipAddress;
             set => ipAddress = value;
         }
-        string IPortActive.PortConfig
+        public string PortConfig
         {
             get => portConfig;
             set => portConfig = value;
         }
-        int IPort.ItemID
+        public int ItemID
         {
             get => itemID;
             set => itemID = value;
         }
-        int IPort.PortNumber
+        public int PortNumber
         {
             get => portNumber;
             set => portNumber = value;
         }
-        string IPort.PortID
+        public string PortID
         {
             get => portID;
             set => portID = value;
         }
-        string IPort.PortName
+        public string PortName
         {
             get => portName;
             set => portName = value;
         }
-        string IPort.PortPhysicalType
+        public string PortPhysicalType
         {
             get => portPhysicalType;
             set => portPhysicalType = value;
         }
-        int IPort.SymbolID
+        public int SymbolID
         {
             get => symbolID;
             set => symbolID = value;
         }
-        string IPort.PhysicalLocation
+        public string PhysicalLocation
         {
             get => physicalLocation;
             set => physicalLocation = value;
