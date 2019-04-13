@@ -16,7 +16,8 @@ namespace BusinessLayer.Models
         private string deviceName;
         private string notes;
         private IList<int> portNumberList = new List<int>();
-        
+        private IList<int> connectionIdList = new List<int>();
+
         // adatbázisból lekérni az eltárolt item id-ját
         // ha id = 0, akkor el kell tárolni az adatbázisba
         public int Id { get => id; set => id = value; } 
@@ -46,30 +47,42 @@ namespace BusinessLayer.Models
             set => portNumberList = value;
         }
 
+        public IList<int> ConnectionIdList
+        {
+            get => connectionIdList;
+            set => connectionIdList = value;
+        }
+
         public IError AddConnection(IConnection connection)
         {
-            throw new NotImplementedException();
+            IError error = NoError();
+            if (ConnectionIdList.Count > 0 && ConnectionIdList.Contains(connection.Id))
+            {
+                error = Helpers.ErrorMessage(ErrorType.NoUniqueID,
+                    "Már létezik ilyen id-val kapcsolat");
+            }
+            else
+            {
+                ConnectionIdList.Add(connection.Id);
+            }
+
+            return error;
         }
 
         public IError AddPort(IPortActive port)
         {
             IError error = NoError();
-            if (portNumberList.Count > 0 && portNumberList.Contains(port.PortNumber))
+            if (PortNumberList.Count > 0 && PortNumberList.Contains(port.PortNumber))
             {
             error = Helpers.ErrorMessage(ErrorType.NoUniqueID,
                     "Már létezik ilyen sorszámú port");
             }
+            else
+            {
             portNumberList.Add(port.PortNumber);
+            }
 
             return error;
-        }
-
-        
-
-        public IItemActive Clone(int id)
-        {
-            this.id = id;
-            return this;
         }
 
         public IConnection GetConnection(int id)

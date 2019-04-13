@@ -79,5 +79,13 @@ namespace BusinessLayer.Interfaces
         ILocation GetLocation(int itemID);
 
         bool ModifyLocation(ILocation location);
+
+        bool AddSymbol(ISymbol symbol);
+
+        ISymbol GetSymbol(int id);
+
+        bool ModifySymbol(ISymbol symbol);
+
+        bool RemoveSymbol(ISymbol symbol);
     }
 }

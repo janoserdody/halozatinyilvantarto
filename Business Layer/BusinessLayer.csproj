@@ -87,6 +87,7 @@
     <Compile Include="RegisterActive.cs" />
     <Compile Include="RegisterConnection.cs" />
     <Compile Include="RegisterPortActive.cs" />
+    <Compile Include="RegisterSymbol.cs" />
     <Compile Include="UISupport\UIFactory.cs" />
     <Compile Include="UISupport\_interfaces\IUIFactory.cs" />
     <Compile Include="UserService.cs" />

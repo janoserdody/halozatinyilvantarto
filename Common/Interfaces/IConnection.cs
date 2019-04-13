@@ -13,13 +13,13 @@ namespace BusinessLayer.Interfaces
 
         string Name { get; set;}
 
-        int SourceItemID { get; set; }
+        int SourceItemId { get; set; }
 
-        int SourcePortID { get; set; }
+        int SourcePortNumber { get; set; }
 
-        int DestinationItemID { get; set; }
+        int DestinationItemId { get; set; }
 
-        int DestinationPortID { get; set; }
+        int DestinationPortNumber { get; set; }
 
     }
 }

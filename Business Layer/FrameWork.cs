@@ -16,6 +16,8 @@ namespace BusinessLayer
         private IRegisterActive registerActive;
         private IRegisterPortActive registerPortActive;
         private IUIFactory uiFactory;
+        private IRegisterConnection registerConnection;
+        private IRegisterSymbol registerSymbol;
         IUserService userService;
         IError error;
 
@@ -28,6 +30,8 @@ namespace BusinessLayer
             this.userService = userService;
             registerActive = new RegisterActive(logService, errorService);
             registerPortActive = new RegisterPortActive(logService, errorService);
+            registerConnection = new RegisterConnection(logService, errorService);
+            registerSymbol = new RegisterSymbol(logService, errorService);
             uiFactory = new UIFactory();
         }
 
@@ -58,8 +62,7 @@ namespace BusinessLayer
             if (!error.IsError)
             {
                 message = "Aktív eszköz elmentve " + item.DeviceName;
-                ok = true;
-                registerActive.Add(item);
+                ok = registerActive.Add(item);
             }
             else
             {
@@ -159,12 +162,17 @@ namespace BusinessLayer
             if (!error.IsError)
             {
                 message = "Aktív port elmentve " + portActive.PortID;
-                ok = true;
-                registerPortActive.Add(portActive);
-                registerActive[itemID].AddPort(portActive);
+                ok = registerPortActive.Add(portActive);
+                if (ok)
+                {
+                error = registerActive[itemID].AddPort(portActive);
                 message += error.Message;
+                }
+                if (!error.IsError)
+                {
                 error = dataService.UpdateItemActive(registerActive[itemID]);
                 message += error.Message;
+                }
             }
             else
             {
@@ -203,12 +211,45 @@ namespace BusinessLayer
 
         bool IFrameWork.AddConnection(IConnection connection)
         {
-            throw new NotImplementedException();
+            bool ok = false;
+
+            string message;
+
+            IError error = dataService.InsertConnection(connection);
+
+            if (!error.IsError)
+            {
+                message = "Kapcsolat elmentve " + connection.Name;
+                ok = registerConnection.Add(connection);
+                if (ok)
+                {
+                registerActive[connection.SourceItemId].AddConnection(connection);
+                message += error.Message;
+                registerActive[connection.DestinationItemId].AddConnection(connection);
+                message += error.Message;
+                }
+                if (!error.IsError)
+                {
+                    error = dataService.UpdateItemActive(registerActive[connection.SourceItemId]);
+                    message += error.Message;
+                    error = dataService.UpdateItemActive(registerActive[connection.DestinationItemId]);
+                    message += error.Message;
+                }
+            }
+            else
+            {
+                message = error.Message;
+            }
+
+            logService.Create(message);
+
+            return ok;
         }
 
         IConnection IFrameWork.GetConnection(int connectionID)
         {
-            throw new NotImplementedException();
+            IConnection connection = registerConnection[connectionID];
+            return connection;
         }
 
         bool IFrameWork.ModifyConnection(IConnection connection)
@@ -237,6 +278,46 @@ namespace BusinessLayer
         }
 
         IItemPassive IFrameWork.GetItemPassive()
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IFrameWork.AddSymbol(ISymbol symbol)
+        {
+            bool ok = false;
+
+            string message;
+
+            IError error = dataService.InsertSymbol(symbol);
+
+            if (!error.IsError)
+            {
+                message = "Ábra elmentve " + symbol.Name;
+                ok = registerSymbol.Add(symbol);
+            }
+            else
+            {
+                message = error.Message;
+            }
+
+            logService.Create(message);
+
+            return ok;
+        }
+
+        ISymbol IFrameWork.GetSymbol(int id)
+        {
+            ISymbol symbol = registerSymbol[id];
+
+            return symbol;
+        }
+
+        bool IFrameWork.ModifySymbol(ISymbol symbol)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IFrameWork.RemoveSymbol(ISymbol symbol)
         {
             throw new NotImplementedException();
         }

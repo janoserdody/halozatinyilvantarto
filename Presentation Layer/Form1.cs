@@ -52,7 +52,7 @@ namespace PresentationLayer
             {
                 throw new Exception("Hibás UIFactory!");
             }
-            
+
             // példa lekéri a stílusát egy gombnak
             uiFactory.GetButton(this.button1, "blueButton", "search", "DrawingModule");
 
@@ -61,35 +61,72 @@ namespace PresentationLayer
             frameWork.LoadDatabase();
 
             // példa: létrehoz egy új aktív eszközt
-            IItemActive item = new ItemActive();
-                item.DeviceName = "akármi";
-                item.DeviceID = "router";
-                item.Notes = "ajtó mellett balra";
-                frameWork.AddItemActive(item);
-                int itemId = item.Id;
-                MessageBox.Show("adatbázisba elmentve: eszköz id: " + item.Id.ToString());
+            IItemActive item = new ItemActive
+            {
+            DeviceName = "akármi",
+            DeviceID = "router1",
+            Notes = "ajtó mellett balra"
+        };
 
-                // példa: létrehoz egy második aktív eszközt
-                IItemActive item2 = new ItemActive();
-                item2.DeviceName = "majom";
-                item2.DeviceID = "router";
-                item2.Notes = "ajtó mellett balra";
-                frameWork.AddItemActive(item2);
-                int itemId2 = item2.Id;
-                MessageBox.Show("adatbázisba elmentve: eszköz id: " + item2.Id.ToString());
+            frameWork.AddItemActive(item);
+            int itemId = item.Id;
+            MessageBox.Show("adatbázisba elmentve: eszköz id: " + item.Id.ToString());
+
+            // példa: létrehoz egy második aktív eszközt
+            IItemActive item2 = new ItemActive
+            {
+            DeviceName = "teve",
+            DeviceID = "switch",
+            Notes = "ajtó mellett balra",
+            };
+
+            frameWork.AddItemActive(item2);
+            int itemId2 = item2.Id;
+            MessageBox.Show("adatbázisba elmentve: eszköz id: " + item2.Id.ToString());
 
             // példa: létrehoz egy aktív portot
-            IPortActive port1 = new PortActive();
-            port1.ItemID = 1;
-            port1.PortNumber = 1;
-            port1.PortName = "elso";
-            port1.PhysicalLocation = "ajto mellett";
-            port1.PortID = "5/1";
-            port1.PortPhysicalType = "UTP";
-            port1.SymbolID = 2;
+            IPortActive port1 = new PortActive
+            {
+            ItemID = 1,
+            PortNumber = 1,
+            PortName = "elso",
+            PhysicalLocation = "ajto mellett",
+            PortID = "5/1",
+            PortPhysicalType = "UTP",
+            SymbolID = 2};
+
             frameWork.AddPortActive(port1.ItemID, port1);
             MessageBox.Show("adatbázisba mentett port itemid és portnumber: " + port1.ItemID.ToString()
                 + " " + port1.PortNumber.ToString());
+
+            // példa: létrehoz egy második aktív portot
+            IPortActive port2 = new PortActive
+            {
+                ItemID = 2,
+                PortNumber = 1,
+                PortName = "2/1",
+                PhysicalLocation = "ablak mellett",
+                PortID = "6/1",
+                PortPhysicalType = "Ethernet",
+                SymbolID = 2
+            };
+
+            frameWork.AddPortActive(port1.ItemID, port1);
+            MessageBox.Show("adatbázisba mentett port itemid és portnumber: " + port1.ItemID.ToString()
+                + " " + port1.PortNumber.ToString());
+
+            // példa: létrehoz egy connection-t
+            IConnection connection1 = new Connection {
+            Name = "UTP kábel",
+            SourceItemId = 1,
+            SourcePortNumber = 1,
+            DestinationItemId = 2,
+            DestinationPortNumber = 1};
+
+            frameWork.AddConnection(connection1);
+
+            // példa: létrehoz egy ábrát
+
 
             //példa:  egy eszközt lekér
             IItemActive item3 = frameWork.GetItemActive(itemId);

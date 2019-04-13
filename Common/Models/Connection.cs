@@ -12,15 +12,15 @@ namespace BusinessLayer.Models
         private int id;
         private string name;
         private int sourceItemId;
-        private int sourcePortId;
+        private int sourcePortNumber;
         private int destinationItemId;
-        private int destinationPortId;
+        private int destinationPortNumber;
 
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
-        public int SourceItemID { get => sourceItemId; set => sourceItemId = value; }
-        public  int SourcePortID { get => sourcePortId; set => sourcePortId = value; }
-        public  int DestinationItemID { get => destinationItemId; set => destinationItemId = value; }
-        public  int DestinationPortID { get => destinationPortId; set => destinationPortId = value; }
+        public int SourceItemId { get => sourceItemId; set => sourceItemId = value; }
+        public  int SourcePortNumber { get => sourcePortNumber; set => sourcePortNumber = value; }
+        public  int DestinationItemId { get => destinationItemId; set => destinationItemId = value; }
+        public  int DestinationPortNumber { get => destinationPortNumber; set => destinationPortNumber = value; }
     }
 }
