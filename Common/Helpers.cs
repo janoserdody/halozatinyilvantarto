@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Common.Interfaces;
+using Common.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLayer.Interfaces;
-using BusinessLayer.Models;
 
-namespace BusinessLayer
+namespace Common
 {
     public static class Helpers
     {
@@ -15,21 +11,33 @@ namespace BusinessLayer
             IError error = new Error(errorType, errorMessage);
             return error;
         }
-    }
 
-    public enum ErrorType
-    {
-        NoError = 0,
-        DatabaseError,
-        InputError,
-        NoUniqueID,
-        NoItem
-    }
+        public static IList<string> GetSymbolNames()
+        {
+            IList<string> symbolNameList = new List<string>
+            {
+                "switch","pc","server","wirelessrouter",
+                "linevertical","linehorizontal",
+                "accesspoint","bridge","hub","multilayerswitch",
+                "opticalcrossconnect","opticalrouter"
+            };
+            return symbolNameList;
+        }
 
-    public enum ConnectorType
-    {
-        Single,
-        Double,
-        Rated
+        public enum ErrorType
+        {
+            NoError = 0,
+            DatabaseError,
+            InputError,
+            NoUniqueID,
+            NoItem
+        }
+
+        public enum ConnectorType
+        {
+            Single,
+            Double,
+            Rated
+        }
     }
 }

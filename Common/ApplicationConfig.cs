@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace BusinessLayer
+namespace Common
 {
     public static class ApplicationConfig
     {

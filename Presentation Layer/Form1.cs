@@ -3,12 +3,13 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using LiteDB;
-using BusinessLayer.Support._interfaces;
-using BusinessLayer.Interfaces;
-using BusinessLayer;
-using BusinessLayer.Models;
+using Common.Support._interfaces;
+using Common.Interfaces;
+using Common;
+using Common.Models;
 using Presentation_Layer.DrawingModule;
 using System.Collections.Generic;
+using static Common.Helpers;
 
 namespace PresentationLayer
 {
@@ -58,7 +59,7 @@ namespace PresentationLayer
             uiFactory.GetButton(this.button1, "blueButton", "search", "DrawingModule");
 
             // Betölti az egész adatbázist a memóriába
-            MessageBox.Show("Beolvasom az adatbázist a memóriába");
+            //MessageBox.Show("Beolvasom az adatbázist a memóriába");
             frameWork.LoadDatabase();
 
             // példa: létrehoz egy ábrát
@@ -85,7 +86,7 @@ namespace PresentationLayer
 
             frameWork.AddItemActive(item);
             int itemId = item.Id;
-            MessageBox.Show("adatbázisba elmentve: eszköz id: " + item.Id.ToString());
+            //MessageBox.Show("adatbázisba elmentve: eszköz id: " + item.Id.ToString());
 
             // példa: létrehoz egy második aktív eszközt
             IItemActive item2 = new ItemActive
@@ -98,7 +99,7 @@ namespace PresentationLayer
 
             frameWork.AddItemActive(item2);
             int itemId2 = item2.Id;
-            MessageBox.Show("adatbázisba elmentve: eszköz id: " + item2.Id.ToString());
+            //MessageBox.Show("adatbázisba elmentve: eszköz id: " + item2.Id.ToString());
 
             // példa: létrehoz egy aktív portot
             IPortActive port1 = new PortActive
@@ -113,8 +114,8 @@ namespace PresentationLayer
             };
 
             frameWork.AddPortActive(port1.ItemID, port1);
-            MessageBox.Show("adatbázisba mentett port itemid és portnumber: " + port1.ItemID.ToString()
-                + " " + port1.PortNumber.ToString());
+           // MessageBox.Show("adatbázisba mentett port itemid és portnumber: " + port1.ItemID.ToString()
+            //    + " " + port1.PortNumber.ToString());
 
             // példa: létrehoz egy második aktív portot
             IPortActive port2 = new PortActive
@@ -129,8 +130,8 @@ namespace PresentationLayer
             };
 
             frameWork.AddPortActive(port1.ItemID, port1);
-            MessageBox.Show("adatbázisba mentett port itemid és portnumber: " + port1.ItemID.ToString()
-                + " " + port1.PortNumber.ToString());
+            //MessageBox.Show("adatbázisba mentett port itemid és portnumber: " + port1.ItemID.ToString()
+             //   + " " + port1.PortNumber.ToString());
 
             // példa: létrehoz egy connection-t
             IConnection connection1 = new Connection
@@ -148,11 +149,11 @@ namespace PresentationLayer
 
             //példa:  egy eszközt lekér
             IItemActive item3 = frameWork.GetItemActive(itemId);
-            MessageBox.Show("lekérve: eszköz neve: " + item3.DeviceName);
+            //MessageBox.Show("lekérve: eszköz neve: " + item3.DeviceName);
 
             //példa:  egy eszközt lekér
             IItemActive item4 = frameWork.GetItemActive(itemId2);
-            MessageBox.Show("lekérve: eszköz neve: " + item4.DeviceName);
+            //MessageBox.Show("lekérve: eszköz neve: " + item4.DeviceName);
 
             // példa: lekéri a GetService() -vel az IErrorservice szervízt
             // utána megjeleníti a hibaüzenetet
@@ -176,12 +177,7 @@ namespace PresentationLayer
 
         private void LoadSymbols()
         {
-            IList<string> symbolNameList = new List<string>
-            {
-                "switch","pc","server","wirelessrouter",
-                "accesspoint","bridge","hub","multilayerswitch",
-                "opticalcrossconnect","opticalrouter"
-            };
+            IList<string> symbolNameList = Helpers.GetSymbolNames();
 
             string symbolPath = @".\Resources\";
             ISymbol loadSymbol;

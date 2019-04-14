@@ -1,8 +1,8 @@
-﻿using BusinessLayer.Interfaces;
+﻿using Common.Interfaces;
 using System.Drawing;
 using System.IO;
 
-namespace BusinessLayer.Models
+namespace Common.Models
 {
     public class Symbol : ISymbol
     {

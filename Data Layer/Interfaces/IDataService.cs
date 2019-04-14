@@ -1,12 +1,6 @@
-﻿using System;
+﻿using Common.Interfaces;
+using Common.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLayer.Interfaces;
-using BusinessLayer.Models;
-using BusinessLayer.Interfaces;
-using BusinessLayer.Models;
 
 namespace DataLayer.Interfaces
 {

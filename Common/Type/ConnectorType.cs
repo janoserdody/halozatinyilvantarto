@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer.Interfaces;
+using Common.Interfaces;
+using static Common.Helpers;
 
-namespace BusinessLayer.Models
+namespace Common.Models
 {
     public class ConnectorType
     {

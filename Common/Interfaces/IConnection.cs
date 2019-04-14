@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace BusinessLayer.Interfaces
+namespace Common.Interfaces
 {
     public interface IConnection
     {

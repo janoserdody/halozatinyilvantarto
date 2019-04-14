@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer.Models;
-using BusinessLayer.Models;
+using Common.Models;
+using Common.Models;
 
-namespace BusinessLayer.Interfaces
+namespace Common.Interfaces
 {
     public interface IUserService
     {

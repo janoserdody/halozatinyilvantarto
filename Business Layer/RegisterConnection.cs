@@ -1,12 +1,13 @@
-﻿using BusinessLayer;
-using BusinessLayer.Interfaces;
+﻿using Common;
+using Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Common.Helpers;
 
-namespace BusinessLayer
+namespace Common
 {
     public class RegisterConnection : IRegisterConnection
     {

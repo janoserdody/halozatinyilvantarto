@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer.Interfaces;
-using BusinessLayer.Models;
+using Common.Interfaces;
+using Common.Models;
 
-namespace BusinessLayer
+namespace Common
 {
     public class Mapper : IMapper
     {

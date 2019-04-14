@@ -1,12 +1,12 @@
-﻿using BusinessLayer;
-using BusinessLayer.Interfaces;
-using BusinessLayer.Models;
+﻿using Common;
+using Common.Interfaces;
+using Common.Models;
 using DataLayer.Interfaces;
 using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using static Common.Helpers;
 
 namespace DataLayer
 {
