@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Interfaces;
+﻿using BusinessLayer.Interfaces;
+using BusinessLayer.Models;
 using Common.Models;
 
-namespace Common
+namespace BusinessLayer
 {
     public class Mapper : IMapper
     {

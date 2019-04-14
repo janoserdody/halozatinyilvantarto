@@ -1,12 +1,11 @@
-﻿using System;
+﻿using BusinessLayer.Interfaces;
+using Common;
+using Common.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Interfaces;
 using static Common.Helpers;
 
-namespace Common
+namespace BusinessLayer
 {
     public class RegisterSymbol : IRegisterSymbol
     {

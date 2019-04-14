@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Common.Models;
 using Common.Models;
 
-namespace Common.Interfaces
+namespace BusinessLayer.Interfaces
 {
     public interface IUserService
     {

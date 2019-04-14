@@ -1,14 +1,14 @@
-﻿using Common;
+﻿using BusinessLayer.Interfaces;
+using BusinessLayer.Support;
+using BusinessLayer.Support._interfaces;
+using Common;
 using Common.Interfaces;
-using Common.Models;
-using Common.Support;
-using Common.Support._interfaces;
 using DataLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using static Common.Helpers;
 
-namespace Common
+namespace BusinessLayer
 {
     public class FrameWork : IFrameWork
     {

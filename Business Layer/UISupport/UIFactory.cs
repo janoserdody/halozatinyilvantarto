@@ -1,12 +1,8 @@
-﻿using Common.Support._interfaces;
+﻿using BusinessLayer.Support._interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Common.Support
+namespace BusinessLayer.Support
 {
     public class UIFactory : IUIFactory
     {

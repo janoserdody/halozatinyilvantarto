@@ -1,6 +1,7 @@
-﻿using Common;
+﻿using BusinessLayer.Interfaces;
+using BusinessLayer.Support._interfaces;
+using Common;
 using Common.Interfaces;
-using Common.Support._interfaces;
 using System;
 using System.Drawing;
 using System.Windows.Forms;

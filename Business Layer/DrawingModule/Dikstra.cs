@@ -1,4 +1,4 @@
-﻿namespace Common.DrawingModule
+﻿namespace BusinessLayer.DrawingModule
 {
     using System;
     using System.Collections.Generic;

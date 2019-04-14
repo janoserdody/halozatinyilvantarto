@@ -1,12 +1,8 @@
-﻿using Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BusinessLayer.Interfaces;
 using Serilog;
+using System;
 
-namespace Common
+namespace BusinessLayer
 {
     public class LogService : ILogService
     {
