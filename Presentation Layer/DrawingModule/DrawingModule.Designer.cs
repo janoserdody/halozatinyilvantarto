@@ -55,8 +55,7 @@ namespace Presentation_Layer.DrawingModule
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 1);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -83,6 +82,7 @@ namespace Presentation_Layer.DrawingModule
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "DrawingModule";
             this.Text = "DrawingModule";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DrawingModule_FormClosing);
             this.Load += new System.EventHandler(this.DrawingModule_Load);
             this.ResumeLayout(false);
 

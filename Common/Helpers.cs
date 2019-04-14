@@ -6,7 +6,15 @@ namespace Common
 {
     public static class Helpers
     {
-        public static IError ErrorMessage(ErrorType errorType, string errorMessage = "")
+        private static IList<string> symbolNameList = new List<string>
+            {
+                "router","switch","pc","server","wirelessrouter",
+                "linevertical","linehorizontal",
+                "accesspoint","bridge","hub","multilayerswitch",
+                "opticalcrossconnect","opticalrouter"
+            };
+
+    public static IError ErrorMessage(ErrorType errorType, string errorMessage = "")
         {
             IError error = new Error(errorType, errorMessage);
             return error;
@@ -14,14 +22,13 @@ namespace Common
 
         public static IList<string> GetSymbolNames()
         {
-            IList<string> symbolNameList = new List<string>
-            {
-                "switch","pc","server","wirelessrouter",
-                "linevertical","linehorizontal",
-                "accesspoint","bridge","hub","multilayerswitch",
-                "opticalcrossconnect","opticalrouter"
-            };
             return symbolNameList;
+        }
+
+        public static int GetSymbolIndex(string name)
+        {
+            int index = symbolNameList.IndexOf(name);
+            return index + 1;
         }
 
         public enum ErrorType

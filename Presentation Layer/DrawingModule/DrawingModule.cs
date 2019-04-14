@@ -52,16 +52,32 @@ namespace Presentation_Layer.DrawingModule
 
         private void DrawingModule_Load(object sender, EventArgs e)
         {
-            ISymbol routerSymbol = frameWork.GetSymbol(1);
+            ISymbol routerSymbol = frameWork.GetSymbol(Helpers.GetSymbolIndex("router"));
 
-            ISymbol switchSymbol = frameWork.GetSymbol(2);
+            ISymbol switchSymbol = frameWork.GetSymbol(Helpers.GetSymbolIndex("switch"));
 
-            ISymbol lineVertical = frameWork.GetSymbol(5);
+            ISymbol lineVertical = frameWork.GetSymbol(Helpers.GetSymbolIndex("linevertical"));
 
-            ISymbol lineHorizontal = frameWork.GetSymbol(6);
+            ISymbol lineHorizontal = frameWork.GetSymbol(Helpers.GetSymbolIndex("linehorizontal"));
 
             ImageLoad(1, 1, routerSymbol.GetImage());
             ImageLoad(2, 2, switchSymbol.GetImage());
+            Random rnd = new Random();
+
+            for (int i = 0; i < 15; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    ImageLoad(i, j, frameWork.GetSymbol(rnd.Next(1, 12)).GetImage());
+                }
+
+            }
+        }
+
+        private void DrawingModule_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
         }
     }
 }

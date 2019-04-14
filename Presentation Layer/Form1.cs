@@ -62,13 +62,13 @@ namespace PresentationLayer
             //MessageBox.Show("Beolvasom az adatbázist a memóriába");
             frameWork.LoadDatabase();
 
+            // betölti az ábrákat
+            LoadSymbols();
+
             // példa: létrehoz egy ábrát
             ISymbol symbolRouter = new Symbol();
             symbolRouter.Load("router", @".\Resources\router.jpg");
             frameWork.AddSymbol(symbolRouter);
-
-            // betölti az ábrákat
-            LoadSymbols();
 
             ISymbol exampleSymbol = frameWork.GetSymbol(2);
 
