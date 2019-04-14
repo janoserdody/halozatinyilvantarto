@@ -6,7 +6,6 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using static Common.Helpers;
-using PresentationLayer.DrawingModule;
 
 namespace PresentationLayer.DrawingModule
 {
@@ -52,7 +51,6 @@ namespace PresentationLayer.DrawingModule
                 //tableLayoutPanel1.Controls.Remove((tableLayoutPanel1.GetControlFromPosition(i / 6, i % 6)));
            
                 //tableLayoutPanel1.GetControlFromPosition(i / 6, i % 6).Visible = false;
-            
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)

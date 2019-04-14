@@ -20,6 +20,8 @@ namespace PresentationLayer.DrawingModule
 
         private DrawingModulePL view;
 
+        private int pathIndex;
+
         public PrintPath(IFrameWork frameWork, DrawingModulePL view)
         {
             this.frameWork = frameWork;
@@ -40,25 +42,54 @@ namespace PresentationLayer.DrawingModule
             else
             {
                 int pathLength = 0;
-                for (int i = 0; i < path.Count - 1; i++)
+                for (int z = 0; z < 5; z++)
                 {
-                    pathLength += graph[path[i], path[i + 1]];
-                    PrintItem(adatok[path[i]].ItemType, i);
-                    //Console.Write(adatok[path[i]].nev);
-                    //if (i != path.Count - 2) Console.Write(" -> ");
+                    for (int i = 0; i < path.Count - 1; i++)
+                    {
+                        pathLength += graph[path[i], path[i + 1]];
+                        PrintItem(adatok[path[i]].ItemType);
+                        //Console.Write(adatok[path[i]].nev);
+                        //if (i != path.Count - 2) Console.Write(" -> ");
+                    }
                 }
+                
 
                 //var formattedPath = string.Join(" -> ", path);
                 //Console.WriteLine("{0}   ({1} összerendelés)", formattedPath, pathLength);
             }
         }
 
-        private void PrintItem(SymbolName symbolName, int pathNumber)
+        private void PrintItem(SymbolName symbolName)
         {
             ISymbol symbol = frameWork.GetSymbol(symbolName);
-            view.ImageLoad( pathNumber % view.ColumnNumber , pathNumber / view.ColumnNumber, symbol.GetImage());
-           // ISymbol link = frameWork.GetSymbol(SymbolName.Linehorizontal);
-            //view.ImageLoad()
+            int pathX, pathY;
+            ConvertPath(out pathX, out pathY);
+            view.ImageLoad(pathX, pathY, symbol.GetImage());
+            pathIndex++;
+            ConvertPath(out pathX, out pathY);
+            ISymbol link;
+            // TODO javítani bal vagy jobb kanyar
+            if (pathX == view.ColumnNumber - 1 || pathX == 0)
+            {
+             link = frameWork.GetSymbol(SymbolName.Linevertical);
+            }
+            else
+            {
+             link = frameWork.GetSymbol(SymbolName.Linehorizontal);
+            }
+            view.ImageLoad(pathX, pathY , link.GetImage());
+            pathIndex++;
+
+        }
+
+        private void ConvertPath(out int pathX, out int pathY)
+        {
+            pathX = pathIndex % (view.ColumnNumber);
+            pathY = pathIndex / (view.ColumnNumber);
+            if (pathY % 2 > 0)
+            {
+                pathX = view.ColumnNumber -1 - pathX;
+            }
         }
     }
 }

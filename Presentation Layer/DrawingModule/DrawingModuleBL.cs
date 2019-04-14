@@ -1,12 +1,5 @@
-﻿using BusinessLayer;
-using BusinessLayer.DrawingModule;
+﻿using BusinessLayer.DrawingModule;
 using BusinessLayer.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Common.Helpers;
 
 namespace PresentationLayer.DrawingModule
