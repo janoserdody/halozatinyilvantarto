@@ -19,6 +19,5 @@ namespace BusinessLayer.DrawingModule
             Obj1 = p3;
             Obj2 = p4;
         }
-
     }
 }

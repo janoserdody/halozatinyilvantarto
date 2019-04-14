@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Common.Helpers;
 
 namespace BusinessLayer.DrawingModule
 {
     public class HalozatiElemek
     {
-        public int ID;
-        public String nev;
+        public int ID { get; set; }
 
-        public HalozatiElemek(int p1, string p2)
+        public String Name { get; set; }
+
+        public SymbolName ItemType { get; set; }
+
+        public HalozatiElemek(int id, string name, SymbolName symbolName)
         {
-            ID = p1;
-            nev = p2;
-
+            this.ID = id;
+            Name = name;
+            this.ItemType = symbolName;
         }
     }
 }

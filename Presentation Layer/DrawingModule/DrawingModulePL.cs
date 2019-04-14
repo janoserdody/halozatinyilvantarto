@@ -6,18 +6,28 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using static Common.Helpers;
+using PresentationLayer.DrawingModule;
 
-namespace Presentation_Layer.DrawingModule
+namespace PresentationLayer.DrawingModule
 {
-    public partial class DrawingModule : Form
+    public partial class DrawingModulePL : Form
     {
         private IUIFactory uiFactory;
 
         private IFrameWork frameWork;
 
-        private EventMediator eventMediator;
+        private readonly int rowNumber = 10;
 
-        public DrawingModule(IUIFactory uiFactory, IFrameWork frameWork, EventMediator eventMediator)
+        private readonly int columnNumber = 15;
+
+        public int RowNumber { get => rowNumber; }
+
+        public int ColumnNumber { get => columnNumber; }
+
+        private EventMediator eventMediator;
+        private DrawingModuleBL drawingModule;
+
+        public DrawingModulePL(IUIFactory uiFactory, IFrameWork frameWork, EventMediator eventMediator)
         {
             this.uiFactory = uiFactory;
             this.frameWork = frameWork;
@@ -31,7 +41,7 @@ namespace Presentation_Layer.DrawingModule
 
         }
 
-        public  void ImageLoad(int x, int y, Bitmap image)
+        public void ImageLoad(int x, int y, Bitmap image)
         {
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Dock = DockStyle.Fill;
@@ -50,6 +60,16 @@ namespace Presentation_Layer.DrawingModule
         }
 
         private void DrawingModule_Load(object sender, EventArgs e)
+        {
+            // példa kirajzolásra
+            // SetUpMatrix();
+
+            drawingModule = new DrawingModuleBL(frameWork, this);
+
+            drawingModule.Drawing();
+        }
+
+        private void SetUpMatrix()
         {
             // példa beolvassa az ábrákat
             ISymbol routerSymbol = frameWork.GetSymbol("router");
