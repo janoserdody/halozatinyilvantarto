@@ -1,10 +1,12 @@
 ﻿using Common;
 using Common.Interfaces;
+using Common.Models;
 using Common.Support;
 using Common.Support._interfaces;
 using DataLayer.Interfaces;
 using System;
 using System.Collections.Generic;
+using static Common.Helpers;
 
 namespace Common
 {
@@ -336,6 +338,20 @@ namespace Common
         ISymbol IFrameWork.GetSymbol(int id)
         {
             ISymbol symbol = registerSymbol[id];
+
+            return symbol;
+        }
+
+        ISymbol IFrameWork.GetSymbol(SymbolName symbolName)
+        {
+            ISymbol symbol = registerSymbol[(int)symbolName];
+
+            return symbol;
+        }
+
+        ISymbol IFrameWork.GetSymbol(string name)
+        {
+            ISymbol symbol = registerSymbol[Helpers.GetSymbolIndex(name)];
 
             return symbol;
         }

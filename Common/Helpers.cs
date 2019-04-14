@@ -31,6 +31,23 @@ namespace Common
             return index + 1;
         }
 
+        public enum SymbolName
+        {
+            Router=1,
+            Switch,
+            Pc,
+            Server,
+            Wirelessrouter,
+            Linevertical,
+            Linehorizontal,
+            Accesspoint,
+            Bridge,
+            Hub,
+            Multilayerswitch,
+            Opticalcrossconnect,
+            Opticalrouter
+        }
+
         public enum ErrorType
         {
             NoError = 0,

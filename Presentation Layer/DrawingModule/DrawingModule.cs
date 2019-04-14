@@ -4,6 +4,7 @@ using Common.Support._interfaces;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using static Common.Helpers;
 
 namespace Presentation_Layer.DrawingModule
 {
@@ -20,6 +21,11 @@ namespace Presentation_Layer.DrawingModule
             this.uiFactory = uiFactory;
             this.frameWork = frameWork;
             this.eventMediator = eventMediator;
+
+            // feliratkozás az ErrorMessage Event-re
+            // hibaüzenet esetén az OnErrorMessage metódus megjeleníti a hibaüzenetet
+            eventMediator.ErrorMessage += OnErrorMessage;
+
             InitializeComponent();
 
         }
@@ -45,13 +51,14 @@ namespace Presentation_Layer.DrawingModule
         private void DrawingModule_Load(object sender, EventArgs e)
         {
             // példa beolvassa az ábrákat
-            ISymbol routerSymbol = frameWork.GetSymbol(Helpers.GetSymbolIndex("router"));
+            ISymbol routerSymbol = frameWork.GetSymbol("router");
 
-            ISymbol switchSymbol = frameWork.GetSymbol(Helpers.GetSymbolIndex("switch"));
+            // másik variáció enum-mal is megadható
+            ISymbol switchSymbol = frameWork.GetSymbol(SymbolName.Switch);
 
-            ISymbol lineVertical = frameWork.GetSymbol(Helpers.GetSymbolIndex("linevertical"));
+            ISymbol lineVertical = frameWork.GetSymbol("linevertical");
 
-            ISymbol lineHorizontal = frameWork.GetSymbol(Helpers.GetSymbolIndex("linehorizontal"));
+            ISymbol lineHorizontal = frameWork.GetSymbol("linehorizontal");
 
             // példa két eszközt kirajzol a képernyőre
             ImageLoad(1, 1, routerSymbol.GetImage());
@@ -72,6 +79,13 @@ namespace Presentation_Layer.DrawingModule
         {
             this.Hide();
             e.Cancel = true;
+        }
+
+        private void OnErrorMessage(object sender, ErrorMessageEventArgs e)
+        {
+            // Az errorService által küldött üzenetet egy label-en megjeleníti, 
+            // vagy errorType-tól függőn MesseageBox-ban is megjelenítheti a hibaüzenetet
+                errorLabel.Text = e.message;
         }
     }
 }

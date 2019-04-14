@@ -84,6 +84,10 @@ namespace Common.Interfaces
 
         ISymbol GetSymbol(int id);
 
+        ISymbol GetSymbol(Helpers.SymbolName symbolName);
+
+        ISymbol GetSymbol(string name);
+
         bool ModifySymbol(ISymbol symbol);
 
         bool RemoveSymbol(ISymbol symbol);
