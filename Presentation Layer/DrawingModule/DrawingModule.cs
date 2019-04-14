@@ -1,16 +1,8 @@
 ﻿using Common;
 using Common.Interfaces;
-using Common.Models;
 using Common.Support._interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Presentation_Layer.DrawingModule
@@ -52,6 +44,7 @@ namespace Presentation_Layer.DrawingModule
 
         private void DrawingModule_Load(object sender, EventArgs e)
         {
+            // példa beolvassa az ábrákat
             ISymbol routerSymbol = frameWork.GetSymbol(Helpers.GetSymbolIndex("router"));
 
             ISymbol switchSymbol = frameWork.GetSymbol(Helpers.GetSymbolIndex("switch"));
@@ -60,17 +53,18 @@ namespace Presentation_Layer.DrawingModule
 
             ISymbol lineHorizontal = frameWork.GetSymbol(Helpers.GetSymbolIndex("linehorizontal"));
 
+            // példa két eszközt kirajzol a képernyőre
             ImageLoad(1, 1, routerSymbol.GetImage());
             ImageLoad(2, 2, switchSymbol.GetImage());
             Random rnd = new Random();
 
+            // példa a képernyőre kiírásra
             for (int i = 0; i < 15; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
                     ImageLoad(i, j, frameWork.GetSymbol(rnd.Next(1, 12)).GetImage());
                 }
-
             }
         }
 
