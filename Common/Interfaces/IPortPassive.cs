@@ -8,5 +8,6 @@ namespace BusinessLayer.Interfaces
 {
     public interface IPortPassive : IPort
     {
+        string PortPassiveTypeName { get; set; }
     }
 }

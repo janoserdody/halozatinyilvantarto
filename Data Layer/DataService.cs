@@ -236,7 +236,8 @@ namespace DataLayer
         {
             IList<ISymbol> result = new List<ISymbol>();
 
-            var result2 = repo.Query<Symbol>().ToList();
+            List<Symbol> result2 = repo.Query<Symbol>().ToList();
+           
             foreach (var item in result2)
             {
                 result.Add(item);
@@ -247,7 +248,7 @@ namespace DataLayer
 
         ISymbol IDataService.GetSymbol(int id)
         {
-            return repo.Query<Symbol>().Where(s => s.Id == id).SingleOrDefault();
+            return repo.Query<Symbol>().Where(s => s.Id == id ).SingleOrDefault();
         }
 
         IError IDataService.InsertConnection(IConnection connection)

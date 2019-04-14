@@ -12,7 +12,7 @@ namespace BusinessLayer
         private int id;
         private string ipAddress;
         private string macAddress;
-        private string activeTypeName;
+        private string portActiveTypeName;
         private string portConfig;
         private int itemID;
         private int portNumber;
@@ -73,6 +73,11 @@ namespace BusinessLayer
         {
             get => physicalLocation;
             set => physicalLocation = value;
+        }
+        public string PortActiveTypeName
+        {
+            get => portActiveTypeName;
+            set => portActiveTypeName = value;
         }
     }
 }

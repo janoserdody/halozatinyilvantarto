@@ -85,6 +85,34 @@ namespace BusinessLayer
                 registerActive.Add(item);
             }
 
+            IList<IPortActive> portList = new List<IPortActive>();
+
+            portList = dataService.GetPortActive();
+
+            foreach (var item in portList)
+            {
+                registerPortActive.Add(item);
+            }
+
+            IList<IConnection> connectionList = new List<IConnection>();
+
+            connectionList = dataService.GetConnection();
+
+            foreach (var item in connectionList)
+            {
+                registerConnection.Add(item);
+            }
+
+            IList<ISymbol> symbolList = new List<ISymbol>();
+
+            symbolList = dataService.GetSymbol();
+
+            foreach (var item in symbolList)
+            {
+                item.Load();
+                registerSymbol.Add(item);
+            }
+
             return true;
         }
 

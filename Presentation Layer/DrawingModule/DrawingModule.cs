@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using BusinessLayer.Interfaces;
+using BusinessLayer.Models;
 using BusinessLayer.Support._interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ namespace Presentation_Layer.DrawingModule
         public DrawingModule(IUIFactory uiFactory, IFrameWork frameWork, EventMediator eventMediator)
         {
             InitializeComponent();
+
+            ISymbol routerSymbol = frameWork.GetSymbol(1);
+
+            ISymbol switchSymbol = frameWork.GetSymbol(2);
 
 
 

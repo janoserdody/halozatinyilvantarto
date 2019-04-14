@@ -11,8 +11,20 @@ namespace BusinessLayer.Interfaces
     {
         int Id { get; set; }
 
-        string Name { get; }
+        string Name { get; set; }
 
-        Image Image { get; set; }
+        /// <summary>
+        /// LiteDB is not compatible with Bitmap class, 
+        /// therefore image load is moved from constructor to method Load()
+        /// and is moved Image property to GetImage() method
+        /// </summary>
+        //Bitmap Image { get; set; }
+                string FileName { get; set; }
+
+        void Load(string name, string fileName);
+
+        void Load();
+
+        Bitmap GetImage();
     }
 }

@@ -8,6 +8,7 @@ using BusinessLayer.Interfaces;
 using BusinessLayer;
 using BusinessLayer.Models;
 using Presentation_Layer.DrawingModule;
+using System.Collections.Generic;
 
 namespace PresentationLayer
 {
@@ -60,13 +61,27 @@ namespace PresentationLayer
             MessageBox.Show("Beolvasom az adatbázist a memóriába");
             frameWork.LoadDatabase();
 
+            // példa: létrehoz egy ábrát
+            ISymbol symbolRouter = new Symbol();
+            symbolRouter.Load("router", @".\Resources\router.jpg");
+            frameWork.AddSymbol(symbolRouter);
+
+            // betölti az ábrákat
+            LoadSymbols();
+
+            ISymbol exampleSymbol = frameWork.GetSymbol(2);
+
+            pictureBox1.Image = exampleSymbol.GetImage();
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
             // példa: létrehoz egy új aktív eszközt
             IItemActive item = new ItemActive
             {
-            DeviceName = "akármi",
-            DeviceID = "router1",
-            Notes = "ajtó mellett balra"
-        };
+                DeviceName = "akármi",
+                DeviceID = "router1",
+                Notes = "ajtó mellett balra",
+                SymbolID = 1
+            };
 
             frameWork.AddItemActive(item);
             int itemId = item.Id;
@@ -75,9 +90,10 @@ namespace PresentationLayer
             // példa: létrehoz egy második aktív eszközt
             IItemActive item2 = new ItemActive
             {
-            DeviceName = "teve",
-            DeviceID = "switch",
-            Notes = "ajtó mellett balra",
+                DeviceName = "teve",
+                DeviceID = "switch",
+                Notes = "ajtó mellett balra",
+                SymbolID = 2
             };
 
             frameWork.AddItemActive(item2);
@@ -87,13 +103,14 @@ namespace PresentationLayer
             // példa: létrehoz egy aktív portot
             IPortActive port1 = new PortActive
             {
-            ItemID = 1,
-            PortNumber = 1,
-            PortName = "elso",
-            PhysicalLocation = "ajto mellett",
-            PortID = "5/1",
-            PortPhysicalType = "UTP",
-            SymbolID = 2};
+                ItemID = 1,
+                PortNumber = 1,
+                PortName = "elso",
+                PhysicalLocation = "ajto mellett",
+                PortID = "5/1",
+                PortPhysicalType = "UTP",
+                SymbolID = 2
+            };
 
             frameWork.AddPortActive(port1.ItemID, port1);
             MessageBox.Show("adatbázisba mentett port itemid és portnumber: " + port1.ItemID.ToString()
@@ -116,16 +133,17 @@ namespace PresentationLayer
                 + " " + port1.PortNumber.ToString());
 
             // példa: létrehoz egy connection-t
-            IConnection connection1 = new Connection {
-            Name = "UTP kábel",
-            SourceItemId = 1,
-            SourcePortNumber = 1,
-            DestinationItemId = 2,
-            DestinationPortNumber = 1};
+            IConnection connection1 = new Connection
+            {
+                Name = "UTP kábel",
+                SourceItemId = 1,
+                SourcePortNumber = 1,
+                DestinationItemId = 2,
+                DestinationPortNumber = 1
+            };
 
             frameWork.AddConnection(connection1);
 
-            // példa: létrehoz egy ábrát
 
 
             //példa:  egy eszközt lekér
@@ -154,6 +172,25 @@ namespace PresentationLayer
             errorService.Write(errorExample2);
 
             this.Focus();
+        }
+
+        private void LoadSymbols()
+        {
+            IList<string> symbolNameList = new List<string>
+            {
+                "switch","pc","server","wirelessrouter",
+                "accesspoint","bridge","hub","multilayerswitch",
+                "opticalcrossconnect","opticalrouter"
+            };
+
+            string symbolPath = @".\Resources\";
+            ISymbol loadSymbol;
+            foreach (string itemName in symbolNameList)
+            {
+                loadSymbol = new Symbol();
+                loadSymbol.Load(itemName, symbolPath + itemName + ".jpg");
+                frameWork.AddSymbol(loadSymbol);
+            }
         }
 
         // ToDo: ezt a metódust külön osztályba tenni, hogy más UI elemek, Form-ok is fel tudjanak iratkozni

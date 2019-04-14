@@ -13,5 +13,7 @@ namespace BusinessLayer.Interfaces
         string IPAddress  {get; set; }
 
         string MacAddress {get; set; }
+
+        string PortActiveTypeName { get; set; }
     }
 }

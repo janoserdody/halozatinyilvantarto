@@ -17,7 +17,7 @@ namespace BusinessLayer.Interfaces
         /// LocationTypeName has to be unique, 
         /// because it is the index at LocationType class
         /// </summary>
-        string LocationTypeName { get; }
+        string LocationTypeName { get; set; }
 
         int ParentID {get; set;}
 
