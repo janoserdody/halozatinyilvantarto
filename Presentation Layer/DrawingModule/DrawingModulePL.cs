@@ -15,7 +15,7 @@ namespace PresentationLayer.DrawingModule
 
         private IFrameWork frameWork;
 
-        private readonly int rowNumber = 10;
+        private readonly int rowNumber = 5;
 
         private readonly int columnNumber = 15;
 
