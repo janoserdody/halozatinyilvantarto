@@ -69,7 +69,12 @@
       <DependentUpon>DrawingModulePL.cs</DependentUpon>
     </Compile>
     <Compile Include="DrawingModule\DrawingModuleBL.cs" />
+    <Compile Include="DrawingModule\FactorySupportDrawingModule.cs" />
     <Compile Include="DrawingModule\PrintPath.cs" />
+    <Compile Include="DrawingModule\_interfaces\IDrawingModuleBL.cs" />
+    <Compile Include="DrawingModule\_interfaces\IDrawingModulePL.cs" />
+    <Compile Include="DrawingModule\_interfaces\IFactorySupportDrawingModule.cs" />
+    <Compile Include="DrawingModule\_interfaces\IPrintPath.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,12 +1,13 @@
 ﻿namespace BusinessLayer.DrawingModule
 {
+    using BusinessLayer.DrawingModule._interfaces;
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Dijkstra
+    public class Dijkstra : IDijkstra
     {
-        public List<int> DijkstraAlg(int[,] graph, int sourceNode, int destinationNode)
+        List<int> IDijkstra.DijkstraAlg(int[,] graph, int sourceNode, int destinationNode)
         {
             var n = graph.GetLength(0);
             var distance = new int[n];

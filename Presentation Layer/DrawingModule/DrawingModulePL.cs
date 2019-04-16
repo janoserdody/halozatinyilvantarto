@@ -1,7 +1,10 @@
-﻿using BusinessLayer.Interfaces;
+﻿using BusinessLayer.DrawingModule;
+using BusinessLayer.DrawingModule._interfaces;
+using BusinessLayer.Interfaces;
 using BusinessLayer.Support._interfaces;
 using Common;
 using Common.Interfaces;
+using PresentationLayer.DrawingModule._interfaces;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,7 +12,7 @@ using static Common.Helpers;
 
 namespace PresentationLayer.DrawingModule
 {
-    public partial class DrawingModulePL : Form
+    public partial class DrawingModulePL : Form, IDrawingModulePL
     {
         private IUIFactory uiFactory;
 
@@ -19,12 +22,15 @@ namespace PresentationLayer.DrawingModule
 
         private readonly int columnNumber = 15;
 
-        public int RowNumber { get => rowNumber; }
+        private IPrintPath printPath;
 
-        public int ColumnNumber { get => columnNumber; }
+        int IDrawingModulePL.RowNumber { get => rowNumber; }
+
+        int IDrawingModulePL.ColumnNumber { get => columnNumber; }
 
         private EventMediator eventMediator;
-        private DrawingModuleBL drawingModule;
+        private IDrawingModuleBL drawingModuleBL;
+        private IFactorySupportDrawingModule factorySupport;
 
         public DrawingModulePL(IUIFactory uiFactory, IFrameWork frameWork, EventMediator eventMediator)
         {
@@ -32,20 +38,27 @@ namespace PresentationLayer.DrawingModule
             this.frameWork = frameWork;
             this.eventMediator = eventMediator;
 
+            factorySupport = new FactorySupportDrawingModule(this, frameWork);
+            printPath = factorySupport.CreatePrintPath();
+            drawingModuleBL = factorySupport.CreateDrawingModuleBL();
+
             // feliratkozás az ErrorMessage Event-re
             // hibaüzenet esetén az OnErrorMessage metódus megjeleníti a hibaüzenetet
             eventMediator.ErrorMessage += OnErrorMessage;
 
             InitializeComponent();
-
         }
 
-        public void ImageLoad(int x, int y, Bitmap image)
+         void IDrawingModulePL.ImageLoad(int x, int y, Bitmap image)
+        {
+            ImageLoad(x, y, image);
+        }
+         private void ImageLoad(int x, int y, Bitmap image)
         {
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Dock = DockStyle.Fill;
                 pictureBox.Image = image;
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
                 tableLayoutPanel1.Controls.Add(pictureBox, x, y);
 
@@ -64,9 +77,7 @@ namespace PresentationLayer.DrawingModule
             // példa kirajzolásra
             // SetUpMatrix();
 
-            drawingModule = new DrawingModuleBL(frameWork, this);
-
-            drawingModule.Drawing();
+            drawingModuleBL.Drawing();
         }
 
         private void SetUpMatrix()

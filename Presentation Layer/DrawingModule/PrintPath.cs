@@ -1,7 +1,9 @@
 ﻿using BusinessLayer;
 using BusinessLayer.DrawingModule;
+using BusinessLayer.DrawingModule._interfaces;
 using BusinessLayer.Interfaces;
 using Common.Interfaces;
+using PresentationLayer.DrawingModule._interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +14,24 @@ using static Common.Helpers;
 
 namespace PresentationLayer.DrawingModule
 {
-    public class PrintPath
+    public class PrintPath : IPrintPath
     {
-        private Dijkstra dijkstra = new Dijkstra();
+        private IDijkstra dijkstra = new Dijkstra();
 
         private IFrameWork frameWork;
 
-        private DrawingModulePL view;
+        private IDrawingModulePL view;
 
         private int pathIndex;
 
-        public PrintPath(IFrameWork frameWork, DrawingModulePL view)
+        public PrintPath(IFrameWork frameWork, IDrawingModulePL view, IDijkstra dijkstra)
         {
             this.frameWork = frameWork;
             this.view = view;
+            this.dijkstra = dijkstra;
         }
 
-        public void Print(int[,] graph, int sourceNode, int destinationNode)
+        void IPrintPath.Print(int[,] graph, int sourceNode, int destinationNode)
         {
             List<int> path = dijkstra.DijkstraAlg(graph, sourceNode, destinationNode);
 
@@ -48,14 +51,14 @@ namespace PresentationLayer.DrawingModule
                     {
                         item = frameWork.GetItemActive(path[index]);
                         pathLength += graph[path[index], path[index + 1]];
-                        PrintItem((SymbolName)item.SymbolID);
+                        PrintItemAndConnection((SymbolName)item.SymbolID);
                     }
                    item = frameWork.GetItemActive(path[index]);
                    PrintSingleItem((SymbolName)item.SymbolID);
             }
         }
 
-        private void PrintItem(SymbolName symbolName)
+        private void PrintItemAndConnection(SymbolName symbolName)
         {
             int pathX, pathY;
             PrintSingleItem(symbolName);

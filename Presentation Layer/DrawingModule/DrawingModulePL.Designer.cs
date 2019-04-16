@@ -18,9 +18,15 @@ namespace PresentationLayer.DrawingModule
         {
             if (disposing && (components != null))
             {
+                UnSubscribe();
                 components.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void UnSubscribe()
+        {
+            eventMediator.ErrorMessage -= OnErrorMessage;
         }
 
         #region Windows Form Designer generated code
