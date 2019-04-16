@@ -11,6 +11,8 @@ namespace BusinessLayer.Interfaces
     {
         ISymbol this[int ID] { get; }
 
+        int Count { get; }
+
         bool Add(ISymbol symbol);
 
         bool Remove(ISymbol symbol);

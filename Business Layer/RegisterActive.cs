@@ -13,6 +13,8 @@ namespace BusinessLayer
         private IErrorService errorService;
         private IList<IItemActive> itemList;
 
+        int IRegisterActive.Count => itemList.Count;
+
         public RegisterActive(ILogService logService, IErrorService errorService)
         {
             this.logService = logService;

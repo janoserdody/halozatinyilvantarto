@@ -11,6 +11,8 @@ namespace BusinessLayer.Interfaces
     {
         IConnection this[int ID] { get; }
 
+        int Count { get; }
+
         bool Add(IConnection connection);
 
         bool Remove(IConnection connection);

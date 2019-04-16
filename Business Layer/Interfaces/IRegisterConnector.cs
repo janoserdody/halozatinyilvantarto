@@ -11,6 +11,8 @@ namespace BusinessLayer.Interfaces
     {
         IConnectorWall this[int ID] { get; }
 
+        int Count { get; }
+
         bool Add(IConnectorWall connector);
 
         bool Remove(IConnectorWall connector);

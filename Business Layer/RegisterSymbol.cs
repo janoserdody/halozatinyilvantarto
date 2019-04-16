@@ -13,6 +13,8 @@ namespace BusinessLayer
         private IErrorService errorService;
         private IList<ISymbol> symbolList;
 
+        int IRegisterSymbol.Count => symbolList.Count;
+
         public RegisterSymbol(ILogService logService, IErrorService errorService)
         {
             this.logService = logService;

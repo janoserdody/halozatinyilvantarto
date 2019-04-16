@@ -13,6 +13,8 @@ namespace BusinessLayer
         private IErrorService errorService;
         private IList<IPortActive> portList;
 
+        int IRegisterPortActive.Count => portList.Count;
+
         public RegisterPortActive(ILogService logService, IErrorService errorService)
         {
             this.logService = logService;

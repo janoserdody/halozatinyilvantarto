@@ -65,6 +65,8 @@ namespace BusinessLayer.Interfaces
 
         IPortPassive GetPortPassive(int itemID, int portNumber);
 
+        int? GetFreePortOfActiveItem(int itemId);
+
         bool RemovePort(int itemID, int portNumber);
 
         bool ModifyPortActive(int itemID, IPortActive portActive);
@@ -92,5 +94,21 @@ namespace BusinessLayer.Interfaces
         bool ModifySymbol(ISymbol symbol);
 
         bool RemoveSymbol(ISymbol symbol);
+
+        int ItemActiveCount { get; }
+
+        int ItemPassiveCount { get; }
+
+        int ConnectionCount { get; }
+
+        int ConnectorWallCount { get; }
+
+        int LocationCount { get; }
+
+        int PortActiveCount { get; }
+
+        int PortPassiveCount { get; }
+
+        int SymbolCount { get; }
     }
 }

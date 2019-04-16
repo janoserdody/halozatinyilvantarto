@@ -11,7 +11,8 @@ namespace Common
                 "router","switch","pc","server","wirelessrouter",
                 "linevertical","linehorizontal",
                 "accesspoint","bridge","hub","multilayerswitch",
-                "opticalcrossconnect","opticalrouter"
+                "opticalcrossconnect","opticalrouter", 
+                "turnleft", "turnright"
             };
 
     public static IError ErrorMessage(ErrorType errorType, string errorMessage = "")
@@ -45,7 +46,9 @@ namespace Common
             Hub,
             Multilayerswitch,
             Opticalcrossconnect,
-            Opticalrouter
+            Opticalrouter,
+            Turnleft,
+            Turnright
         }
 
         public enum ErrorType

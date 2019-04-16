@@ -48,8 +48,10 @@ namespace PresentationLayer.DrawingModule
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
                 tableLayoutPanel1.Controls.Add(pictureBox, x, y);
+
+            //TODO remove method
                 //tableLayoutPanel1.Controls.Remove((tableLayoutPanel1.GetControlFromPosition(i / 6, i % 6)));
-           
+           //TODO getcontrol method
                 //tableLayoutPanel1.GetControlFromPosition(i / 6, i % 6).Visible = false;
         }
 

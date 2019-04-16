@@ -62,8 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawingModule\Dikstra.cs" />
-    <Compile Include="DrawingModule\HalozatiElemek.cs" />
-    <Compile Include="DrawingModule\Vonal.cs" />
     <Compile Include="ErrorService.cs" />
     <Compile Include="FactorySupport.cs.cs" />
     <Compile Include="FrameWork.cs" />

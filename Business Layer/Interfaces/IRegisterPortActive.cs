@@ -11,6 +11,8 @@ namespace BusinessLayer.Interfaces
     {
         IPortActive this[int ItemId, int portNumber] { get; }
 
+        int Count { get; }
+
         bool Add(IPortActive port);
 
         bool Remove(IPortActive port);

@@ -31,8 +31,6 @@ namespace Common.Interfaces
 
         IError RemoveConnection(IConnection connection);
 
-        IConnection GetConnection(int id);
-
         IError RemoveConnection(int id);
         
     }

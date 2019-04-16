@@ -11,6 +11,8 @@ namespace BusinessLayer.Interfaces
     {
         ILocation this[int ID] { get; }
 
+        int Count { get; }
+
         bool Add(ILocation location);
 
         bool Remove(ILocation location);

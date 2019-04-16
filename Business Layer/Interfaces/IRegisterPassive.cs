@@ -11,6 +11,8 @@ namespace BusinessLayer.Interfaces
     {
         IItemPassive this[int ID] { get; }
 
+        int Count { get; }
+
         bool Add(IItemPassive item);
 
         bool Remove(IItemPassive item);

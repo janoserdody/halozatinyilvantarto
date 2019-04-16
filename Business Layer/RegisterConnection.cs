@@ -13,6 +13,8 @@ namespace BusinessLayer
         private IErrorService errorService;
         private IList<IConnection> connectionList;
 
+        int IRegisterConnection.Count => connectionList.Count;
+
         public RegisterConnection(ILogService logService, IErrorService errorService)
         {
             this.logService = logService;

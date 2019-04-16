@@ -27,51 +27,51 @@ namespace PresentationLayer.DrawingModule
             this.frameWork = frameWork;
             this.view = view;
         }
-    public void Print(int[,] graph, int sourceNode, int destinationNode, HalozatiElemek[] adatok, Vonal[] vonalak)
-    {
-        //Console.WriteLine(
-        //     "Útvonal [{0} -> {1}] között: ",
-        //     sourceNode,
-        //     destinationNode);
-        List<int> path = dijkstra.DijkstraAlg(graph, sourceNode, destinationNode);
+
+        public void Print(int[,] graph, int sourceNode, int destinationNode)
+        {
+            List<int> path = dijkstra.DijkstraAlg(graph, sourceNode, destinationNode);
 
             if (path == null)
             {
-                MessageBox.Show("Nincs út [{0} és {1}] között!");
+                IItemActive source = frameWork.GetItemActive(sourceNode);
+                IItemActive destination = frameWork.GetItemActive(sourceNode);
+                MessageBox.Show("Nincs út " + source.DeviceName + source.DeviceID +
+                    " és " + destination.DeviceName  + destination.DeviceID + " között!");
             }
             else
             {
                 int pathLength = 0;
-                for (int z = 0; z < 5; z++)
-                {
-                    for (int i = 0; i < path.Count - 1; i++)
+                int index = 0;
+                IItemActive item;
+                    for ( ; index < path.Count-1 ; index++)
                     {
-                        pathLength += graph[path[i], path[i + 1]];
-                        PrintItem(adatok[path[i]].ItemType);
-                        //Console.Write(adatok[path[i]].nev);
-                        //if (i != path.Count - 2) Console.Write(" -> ");
+                        item = frameWork.GetItemActive(path[index]);
+                        pathLength += graph[path[index], path[index + 1]];
+                        PrintItem((SymbolName)item.SymbolID);
                     }
-                }
-                
-
-                //var formattedPath = string.Join(" -> ", path);
-                //Console.WriteLine("{0}   ({1} összerendelés)", formattedPath, pathLength);
+                   item = frameWork.GetItemActive(path[index]);
+                   PrintSingleItem((SymbolName)item.SymbolID);
             }
         }
 
         private void PrintItem(SymbolName symbolName)
         {
-            ISymbol symbol = frameWork.GetSymbol(symbolName);
             int pathX, pathY;
-            ConvertPath(out pathX, out pathY);
-            view.ImageLoad(pathX, pathY, symbol.GetImage());
+            PrintSingleItem(symbolName);
             pathIndex++;
             ConvertPath(out pathX, out pathY);
             ISymbol link;
-            // TODO javítani bal vagy jobb kanyar
             if (pathX == view.ColumnNumber - 1 || pathX == 0)
             {
-             link = frameWork.GetSymbol(SymbolName.Linevertical);
+                if (pathX == 0)
+                {
+                link = frameWork.GetSymbol(SymbolName.Turnleft);
+                }
+                else
+                {
+                    link = frameWork.GetSymbol(SymbolName.Turnright);
+                }
             }
             else
             {
@@ -80,6 +80,13 @@ namespace PresentationLayer.DrawingModule
             view.ImageLoad(pathX, pathY , link.GetImage());
             pathIndex++;
 
+        }
+        private void PrintSingleItem(SymbolName symbolName)
+        {
+            ISymbol symbol = frameWork.GetSymbol(symbolName);
+            int pathX, pathY;
+            ConvertPath(out pathX, out pathY);
+            view.ImageLoad(pathX, pathY, symbol.GetImage());
         }
 
         private void ConvertPath(out int pathX, out int pathY)

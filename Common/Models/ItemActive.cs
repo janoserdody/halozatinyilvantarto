@@ -86,19 +86,14 @@ namespace Common.Models
             return error;
         }
 
-        public IConnection GetConnection(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IList<int> GetConnectionsIDList()
         {
-            throw new NotImplementedException();
+            return connectionIdList;
         }
 
         public IList<int> GetPortsNumberList()
         {
-            throw new NotImplementedException();
+            return portNumberList;
         }
 
         public IError RemoveConnection(IConnection connection)

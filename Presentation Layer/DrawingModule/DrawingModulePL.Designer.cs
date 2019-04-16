@@ -91,6 +91,7 @@ namespace PresentationLayer.DrawingModule
             this.ClientSize = new System.Drawing.Size(1420, 824);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.AutoScroll = true;
             this.Name = "DrawingModule";
             this.Text = "DrawingModule";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DrawingModule_FormClosing);
