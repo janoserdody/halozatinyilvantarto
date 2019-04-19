@@ -15,6 +15,6 @@ namespace PresentationLayer.DrawingModule._interfaces
 
         int ColumnNumber { get; }
 
-
+        void ClearPath();
     }
 }

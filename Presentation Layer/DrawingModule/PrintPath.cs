@@ -24,38 +24,52 @@ namespace PresentationLayer.DrawingModule
 
         private int pathIndex;
 
+        private List<int> path;
+
+        List<int> IPrintPath.Path { get => path;  }
+
         public PrintPath(IFrameWork frameWork, IDrawingModulePL view, IDijkstra dijkstra)
         {
             this.frameWork = frameWork;
             this.view = view;
             this.dijkstra = dijkstra;
+            path = new List<int>();
         }
 
         void IPrintPath.Print(int[,] graph, int sourceNode, int destinationNode)
         {
-            List<int> path = dijkstra.DijkstraAlg(graph, sourceNode, destinationNode);
+            InitializePrint();
+
+            path = dijkstra.DijkstraAlg(graph, sourceNode, destinationNode);
 
             if (path == null)
             {
                 IItemActive source = frameWork.GetItemActive(sourceNode);
                 IItemActive destination = frameWork.GetItemActive(sourceNode);
                 MessageBox.Show("Nincs út " + source.DeviceName + source.DeviceID +
-                    " és " + destination.DeviceName  + destination.DeviceID + " között!");
+                    " és " + destination.DeviceName + destination.DeviceID + " között!");
             }
             else
             {
                 int pathLength = 0;
                 int index = 0;
                 IItemActive item;
-                    for ( ; index < path.Count-1 ; index++)
-                    {
-                        item = frameWork.GetItemActive(path[index]);
-                        pathLength += graph[path[index], path[index + 1]];
-                        PrintItemAndConnection((SymbolName)item.SymbolID);
-                    }
-                   item = frameWork.GetItemActive(path[index]);
-                   PrintSingleItem((SymbolName)item.SymbolID);
+                for (; index < path.Count - 1; index++)
+                {
+                    item = frameWork.GetItemActive(path[index]);
+                    pathLength += graph[path[index], path[index + 1]];
+                    PrintItemAndConnection((SymbolName)item.SymbolID);
+                }
+                item = frameWork.GetItemActive(path[index]);
+                PrintSingleItem((SymbolName)item.SymbolID);
             }
+        }
+
+        private void InitializePrint()
+        {
+            view.ClearPath();
+            pathIndex = 0;
+            path = new List<int>();
         }
 
         private void PrintItemAndConnection(SymbolName symbolName)

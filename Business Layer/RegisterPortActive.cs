@@ -28,7 +28,7 @@ namespace BusinessLayer
             {
                 if (portList.Count > 0)
                 {
-                    return portList.Where(x => x.ItemID == ItemId).FirstOrDefault();
+                    return portList.Where(x => x.ItemID == ItemId && x.PortNumber == portNumber).FirstOrDefault();
                 }
                 return null;
             }

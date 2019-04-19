@@ -18,12 +18,12 @@ namespace PresentationLayer.DrawingModule
             this.printPath = printPath;
         }
 
-        void IDrawingModuleBL.Drawing()
+        void IDrawingModuleBL.Drawing(int sourceNode, int destinationNode)
         {
             int[,] halozat = new int[frameWork.ItemActiveCount + 1, frameWork.ItemActiveCount + 1];
 
-            // Kapcsolatok feltöltése
-            for (int i = 1; i < frameWork.ConnectionCount; i++)
+            // Kapcsolatok feltöltése, item id 1-től indul
+            for (int i = 1; i < frameWork.ConnectionCount + 1; i++)
             {
                 IConnection connection = frameWork.GetConnection(i);
                 halozat[connection.SourceItemId, connection.DestinationItemId] = 1;
@@ -31,8 +31,8 @@ namespace PresentationLayer.DrawingModule
                 halozat[connection.DestinationItemId, connection.SourceItemId] = 1;
             }
 
-            int sourceNode = 101;
-            int destinationNode = 102;
+            //int sourceNode = 101;
+            //int destinationNode = 103;
             printPath.Print(halozat, sourceNode, destinationNode);
         }
     }

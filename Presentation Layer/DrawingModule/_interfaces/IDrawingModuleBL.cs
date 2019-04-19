@@ -8,6 +8,6 @@ namespace PresentationLayer.DrawingModule._interfaces
 {
     public interface IDrawingModuleBL
     {
-        void Drawing();
+        void Drawing(int sourceNode, int destinationNode);
     }
 }

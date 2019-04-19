@@ -373,7 +373,7 @@ namespace BusinessLayer
 
         IPortActive IFrameWork.GetPortActive(int itemID, int portNumber)
         {
-            throw new NotImplementedException();
+            return registerPortActive[itemID, portNumber];
         }
 
         IPortPassive IFrameWork.GetPortPassive(int itemID, int portNumber)

@@ -8,6 +8,8 @@ namespace PresentationLayer.DrawingModule._interfaces
 {
     public interface IPrintPath
     {
+        List<int> Path { get; }
+
         void Print(int[,] graph, int sourceNode, int destinationNode);
     }
 }

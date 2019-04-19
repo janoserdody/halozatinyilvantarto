@@ -29,6 +29,12 @@ namespace PresentationLayer
 
         private IDrawingModulePL drawingModulePL;
 
+        private Random rnd;
+
+        private List<string> rndIp = new List<string>();
+
+        private List<string> rndMac = new List<string>();
+
         public Form1()
         {
             eventMediator = new EventMediator();
@@ -47,6 +53,8 @@ namespace PresentationLayer
             drawingModulePL = new DrawingModulePL(uiFactory, frameWork, eventMediator);
 
             InitializeComponent();
+
+            InitializeRnd();
 
             // példa: lekéri a GetService() -vel a UIFactory szervízt
             // utána kirajzol egy button-t a felhasználói felületen.
@@ -100,9 +108,19 @@ namespace PresentationLayer
             this.Focus();
         }
 
-        private void SetupNetwork()
+        private void InitializeRnd()
         {
             Random rnd = new Random();
+            for (int i = 0; i < 101; i++)
+            {
+                rndIp.Add(rnd.Next(1, 255).ToString());
+                rndMac.Add(rnd.Next(1, 255).ToString("X"));
+            }
+        }
+
+        private void SetupNetwork()
+        {
+            rnd = new Random();
             SymbolName symbolName;
 
             IList<int> itemIdList = new List<int>();
@@ -111,14 +129,14 @@ namespace PresentationLayer
             {
                 symbolName = rnd.Next(1, 10) % 2 == 0 ? SymbolName.Router : SymbolName.Switch;
 
-                int itemId = SetupItem(i, symbolName);
+                int itemId = SetupItem(i, symbolName, "router");
 
                 itemIdList.Add(itemId);
             }
 
             for (int i = 0; i < 10; i++)
             {
-                int itemId = SetupItem(i, SymbolName.Pc);
+                int itemId = SetupItem(i, SymbolName.Pc, "PC");
 
                 pcList.Add(itemId);
             }
@@ -191,9 +209,15 @@ namespace PresentationLayer
 
         private IPortActive SetupPort(int itemID, int portNumber)
         {
+            int rndIndex = rnd.Next(1,92);
             // példa: létrehoz egy aktív portot
             IPortActive port1 = new PortActive
             {
+                MacAddress = rndMac[rndIndex] + "-" + rndMac[rndIndex + 1]
+                        + rndMac[rndIndex+2] + "-" + rndMac[rndIndex+3] 
+                        + "-" + rndMac[rndIndex+4] + "-" + rndMac[rndIndex+5],
+                IPAddress = rndIp[rndIndex]+"."+ rndIp[rndIndex+1] + "." 
+                            + rndIp[rndIndex+2] + "." + rndIp[rndIndex+3],
                 ItemID = itemID,
                 PortNumber = portNumber,
                 PortName = "port 0/" + portNumber,
@@ -210,13 +234,13 @@ namespace PresentationLayer
 
         
 
-        private int SetupItem(int itemNumber, SymbolName itemType)
+        private int SetupItem(int itemNumber, SymbolName itemType, string name)
         {
             int itemId = 0;
             string deviceId = itemType == SymbolName.Router ? "router" : "pc";
             IItemActive item = new ItemActive
             {
-                DeviceName = "akármi" + itemNumber,
+                DeviceName = name + itemNumber,
                 DeviceID = deviceId + itemNumber,
                 Notes = "ajtó mellett balra",
                 SymbolID = (int)itemType
