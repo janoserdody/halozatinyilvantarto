@@ -35,6 +35,17 @@ namespace PresentationLayer
 
         private List<string> rndMac = new List<string>();
 
+        private readonly int maxPortNumber = 6;
+
+        private readonly int maxPcNumber = 2;
+        private readonly int networkPCNumber = 5;
+
+        private readonly int networkSize = 400;
+
+        private readonly int pathLength = 30;
+
+        public int NetworkSize { get => networkSize; }
+
         public Form1()
         {
             eventMediator = new EventMediator();
@@ -125,7 +136,7 @@ namespace PresentationLayer
 
             IList<int> itemIdList = new List<int>();
             IList<int> pcList = new List<int>();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < NetworkSize; i++)
             {
                 symbolName = rnd.Next(1, 10) % 2 == 0 ? SymbolName.Router : SymbolName.Switch;
 
@@ -134,28 +145,41 @@ namespace PresentationLayer
                 itemIdList.Add(itemId);
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < networkPCNumber; i++)
             {
                 int itemId = SetupItem(i, SymbolName.Pc, "PC");
 
                 pcList.Add(itemId);
             }
 
-            int pathLength = 8;
             int actualPc;
             int nextRouter, actualRouter;
             int? portSource, portDestination;
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < maxPcNumber; i++)
             {
-                for (int j = i + 1; j < 3; j++)
+                for (int j = networkPCNumber - 1; j >= maxPcNumber; j--)
                 {
                     actualPc = pcList[i];
                     portSource = frameWork.GetFreePortOfActiveItem(actualPc);
-                    nextRouter = itemIdList[rnd.Next(0, 99)];
+                    nextRouter = itemIdList[rnd.Next(0, NetworkSize-1)];
                     portDestination = frameWork.GetFreePortOfActiveItem(nextRouter);
-                    if (portSource == null || portDestination == null)
+                    if (portSource == null)
                     {
-                        continue;
+                        break;
+                    }
+                    else if (portDestination == null)
+                    {
+                        int index = NetworkSize/2;
+                        while(portDestination == null && index > 0)
+                        {
+                            nextRouter = itemIdList[rnd.Next(0, NetworkSize - 1)];
+                            portDestination = frameWork.GetFreePortOfActiveItem(nextRouter);
+                            index--;
+                        }
+                        if (index == 0)
+                        {
+                            break;
+                        }
                     }
 
                     SetupConnection(actualPc, (int)portSource, nextRouter, (int)portDestination);
@@ -165,11 +189,25 @@ namespace PresentationLayer
                     for (int k = 0; k < pathLength; k++)
                     {
                         portSource = frameWork.GetFreePortOfActiveItem(actualRouter);
-                        nextRouter = itemIdList[rnd.Next(0, 99)];
+                        nextRouter = itemIdList[rnd.Next(0, NetworkSize-1)];
                         portDestination = frameWork.GetFreePortOfActiveItem(nextRouter);
-                        if (portSource == null || portDestination == null)
+                        if (portSource == null)
                         {
-                            continue;
+                            break;
+                        }
+                        else if (portDestination == null)
+                        {
+                            int index = NetworkSize / 2;
+                            while (portDestination == null && index > 0)
+                            {
+                                nextRouter = itemIdList[rnd.Next(0, NetworkSize - 1)];
+                                portDestination = frameWork.GetFreePortOfActiveItem(nextRouter);
+                                index--;
+                            }
+                            if (index == 0)
+                            {
+                                break;
+                            }
                         }
 
                         SetupConnection(actualRouter, (int)portSource, nextRouter, (int)portDestination);
@@ -180,9 +218,23 @@ namespace PresentationLayer
                     portSource = frameWork.GetFreePortOfActiveItem(actualRouter);
                     actualPc = pcList[j];
                     portDestination = frameWork.GetFreePortOfActiveItem(actualPc);
-                    if (portSource == null || portDestination == null)
+                    if (portSource == null)
                     {
-                        continue;
+                        break;
+                    }
+                    else if (portDestination == null)
+                    {
+                        int PCindex = j - 1;
+                        while (portDestination == null && PCindex >= maxPcNumber)
+                        {
+                            actualPc = pcList[PCindex];
+                            portDestination = frameWork.GetFreePortOfActiveItem(actualPc);
+                            PCindex--;
+                        }
+                        if (PCindex < maxPcNumber)
+                        {
+                            break;
+                        }
                     }
 
                     SetupConnection(actualRouter, (int)portSource, actualPc, (int)portDestination);
@@ -248,9 +300,9 @@ namespace PresentationLayer
             frameWork.AddItemActive(item);
             itemId = item.Id;
 
-            for (int i = 1; i < 11; i++)
+            for (int z = 1; z < maxPortNumber; z++)
             {
-            IPortActive port = SetupPort(itemId, i);
+            IPortActive port = SetupPort(itemId, z);
             frameWork.AddPortActive(itemId, port);
             }
 
