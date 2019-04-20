@@ -248,7 +248,7 @@ namespace PresentationLayer
             // létrehoz egy connection-t és egy reverse connection-t
             IConnection connection = new Connection
             {
-                Name = "UTP kábel" + sourceItemId + "/" + sourcePortNumber
+                Name = "UTP kábel " + sourceItemId + "/" + sourcePortNumber
                 + "/" + destinationItemId + "/" + destinationPortNumber,
                 SourceItemId = sourceItemId,
                 SourcePortNumber = sourcePortNumber,

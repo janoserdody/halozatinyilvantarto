@@ -38,9 +38,9 @@ namespace PresentationLayer.DrawingModule
 
         private BindingList<KeyValuePair<int, string>> portList = new BindingList<KeyValuePair<int, string>>();
 
-        public IList<KeyValuePair<int, string>> itemNameList = new List<KeyValuePair<int, string>>();
+        public BindingList<KeyValuePair<int, string>> itemSourceList = new BindingList<KeyValuePair<int, string>>();
 
-        public IList<KeyValuePair<int, string>> itemDestinationList = new List<KeyValuePair<int, string>>();
+        public BindingList<KeyValuePair<int, string>> itemDestinationList = new BindingList<KeyValuePair<int, string>>();
 
         int IDrawingModulePL.RowNumber { get => rowNumber; }
 
@@ -73,12 +73,12 @@ namespace PresentationLayer.DrawingModule
             {
                 KeyValuePair<int, string> keyValue = new KeyValuePair<int, string>(i,
                   frameWork.GetItemActive(i).DeviceName);
-                itemNameList.Add(keyValue);
+                itemSourceList.Add(keyValue);
                 itemDestinationList.Add(keyValue);
             }
 
             comboBoxSource.DataSource = null;
-            comboBoxSource.DataSource = itemNameList;
+            comboBoxSource.DataSource = itemSourceList;
             comboBoxSource.ValueMember = "Key";
             comboBoxSource.DisplayMember = "Value";
             this.comboBoxSource.SelectedIndexChanged += new System.EventHandler(this.comboBoxSource_SelectedIndexChanged);
