@@ -130,7 +130,6 @@ namespace PresentationLayer.DrawingModule
             this.comboBoxSource.Name = "comboBoxSource";
             this.comboBoxSource.Size = new System.Drawing.Size(175, 21);
             this.comboBoxSource.TabIndex = 2;
-            
             // 
             // comboBoxDestination
             // 

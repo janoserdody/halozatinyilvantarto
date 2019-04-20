@@ -91,10 +91,6 @@ namespace PresentationLayer.DrawingModule
             portListBox.DataSource = portList;
             portListBox.ValueMember = "Key";
             portListBox.DisplayMember = "Value";
-            this.comboBoxSource.TextChanged += new System.EventHandler(this.comboBoxSource_TextChanged);
-            this.comboBoxDestination.TextChanged += new System.EventHandler(this.comboBoxDestination_TextChanged);
-            this.comboBoxSource.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSource_KeyPress);
-            this.comboBoxDestination.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxDestination_KeyPress);
         }
 
         void IDrawingModulePL.ImageLoad(int x, int y, Bitmap image)
@@ -140,26 +136,12 @@ namespace PresentationLayer.DrawingModule
             sourceItem = (int)comboBoxSource.SelectedValue;
         }
 
-        private void comboBoxSource_TextChanged(object sender, EventArgs e)
-        {
-            string text = comboBoxSource.Text;
-
-            int index = comboBoxSource.FindString(text);
-
-            if (index == -1)
-            {
-                return;
-            }
-            comboBoxSource.SelectedIndex = index;
-
-            sourceItem = (int)comboBoxSource.SelectedValue;
-        }
-
         private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
             destinationItem = (int)comboBoxDestination.SelectedValue;
         }
-        private void comboBoxDestination_TextChanged(object sender, EventArgs e)
+       
+        private void buttonPath_Click(object sender, EventArgs e)
         {
             string text = comboBoxDestination.Text;
 
@@ -167,16 +149,27 @@ namespace PresentationLayer.DrawingModule
 
             if (index == -1)
             {
+                MessageBox.Show("Hibás bevitel, kérem válasszon másik cél eszközt!");
                 return;
             }
 
             comboBoxDestination.SelectedIndex = index;
 
             destinationItem = (int)comboBoxDestination.SelectedValue;
-        }
 
-        private void buttonPath_Click(object sender, EventArgs e)
-        {
+            text = comboBoxSource.Text;
+
+            index = comboBoxSource.FindString(text);
+
+            if (index == -1)
+            {
+                MessageBox.Show("Hibás bevitel, kérem válasszon másik forrás eszközt!");
+                return;
+            }
+            comboBoxSource.SelectedIndex = index;
+
+            sourceItem = (int)comboBoxSource.SelectedValue;
+
             drawingModuleBL.Drawing(sourceItem, destinationItem);
         }
 
@@ -306,16 +299,6 @@ namespace PresentationLayer.DrawingModule
             portMacAddressTextBox.Text = port.MacAddress;
 
             portIpAddressTextBox.Text = port.IPAddress;
-        }
-
-        private void comboBoxSource_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            comboBoxSource.SelectAll();
-        }
-
-        private void comboBoxDestination_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            comboBoxDestination.SelectAll();
         }
     }
 }
