@@ -256,17 +256,7 @@ namespace PresentationLayer
                 DestinationPortNumber = destinationPortNumber
             };
 
-            IConnection reverseConnection = new Connection
-            {
-                Name = "UTP kábel" + destinationItemId + "/" + destinationPortNumber + "/" 
-                    + sourceItemId + "/" + sourcePortNumber,
-                SourceItemId = destinationItemId,
-                SourcePortNumber = destinationPortNumber,
-                DestinationItemId = sourceItemId,
-                DestinationPortNumber = sourcePortNumber
-            };
-
-            frameWork.AddConnection(connection, reverseConnection);
+            frameWork.AddConnection(connection);
         }
 
         private IPortActive SetupPort(int itemID, int portNumber)

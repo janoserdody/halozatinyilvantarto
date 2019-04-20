@@ -71,7 +71,7 @@ namespace BusinessLayer.Interfaces
 
         bool ModifyPortActive(int itemID, IPortActive portActive);
 
-        bool AddConnection(IConnection connection, IConnection reverseConnection);
+        bool AddConnection(IConnection connection);
 
         IConnection  GetConnection(int connectionID);
 

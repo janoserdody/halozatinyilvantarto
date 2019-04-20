@@ -197,7 +197,7 @@ namespace PresentationLayer.DrawingModule
             foreach (int searchId in connectionIdList)
             {
                 connection = frameWork.GetConnection(searchId);
-                if (connection.DestinationItemId == nextItem.Id)
+                if (connection.DestinationItemId == nextItem.Id || connection.SourceItemId == nextItem.Id)
                 {
                     connectionTextBox.Text = connection.Name;
                     break;
