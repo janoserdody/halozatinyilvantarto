@@ -58,8 +58,6 @@ namespace PresentationLayer.DrawingModule
             this.portNameTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.connectionTextBox = new System.Windows.Forms.TextBox();
-            this.drawingModulePLBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.drawingModulePLBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -74,6 +72,8 @@ namespace PresentationLayer.DrawingModule
             this.portConfigTextBox = new System.Windows.Forms.TextBox();
             this.portMacAddressTextBox = new System.Windows.Forms.TextBox();
             this.portIpAddressTextBox = new System.Windows.Forms.TextBox();
+            this.drawingModulePLBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.drawingModulePLBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.drawingModulePLBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drawingModulePLBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -130,6 +130,7 @@ namespace PresentationLayer.DrawingModule
             this.comboBoxSource.Name = "comboBoxSource";
             this.comboBoxSource.Size = new System.Drawing.Size(175, 21);
             this.comboBoxSource.TabIndex = 2;
+            
             // 
             // comboBoxDestination
             // 
@@ -273,14 +274,6 @@ namespace PresentationLayer.DrawingModule
             this.connectionTextBox.Size = new System.Drawing.Size(123, 20);
             this.connectionTextBox.TabIndex = 18;
             // 
-            // drawingModulePLBindingSource
-            // 
-            this.drawingModulePLBindingSource.DataSource = typeof(PresentationLayer.DrawingModule.DrawingModulePL);
-            // 
-            // drawingModulePLBindingSource1
-            // 
-            this.drawingModulePLBindingSource1.DataSource = typeof(PresentationLayer.DrawingModule.DrawingModulePL);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -399,6 +392,14 @@ namespace PresentationLayer.DrawingModule
             this.portIpAddressTextBox.ReadOnly = true;
             this.portIpAddressTextBox.Size = new System.Drawing.Size(147, 20);
             this.portIpAddressTextBox.TabIndex = 32;
+            // 
+            // drawingModulePLBindingSource
+            // 
+            this.drawingModulePLBindingSource.DataSource = typeof(PresentationLayer.DrawingModule.DrawingModulePL);
+            // 
+            // drawingModulePLBindingSource1
+            // 
+            this.drawingModulePLBindingSource1.DataSource = typeof(PresentationLayer.DrawingModule.DrawingModulePL);
             // 
             // DrawingModulePL
             // 
