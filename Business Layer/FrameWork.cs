@@ -209,7 +209,7 @@ namespace BusinessLayer
             return ok;
         }
 
-        bool IFrameWork.AddConnection(IConnection connection)
+        bool IFrameWork.AddConnection(IConnection connection, IConnection reverseConnection)
         {
             bool ok = false;
 
@@ -217,15 +217,23 @@ namespace BusinessLayer
 
             IError error = dataService.InsertConnection(connection);
 
+
             if (!error.IsError)
             {
                 message = "Kapcsolat elmentve " + connection.Name;
                 ok = registerConnection.Add(connection);
+
+                error = dataService.InsertConnection(reverseConnection);
+
+                if (!error.IsError)
+                {
+                    message = "Kapcsolat elmentve " + reverseConnection.Name;
+                    ok = registerConnection.Add(reverseConnection);
                 if (ok)
                 {
                 registerActive[connection.SourceItemId].AddConnection(connection);
                 message += error.Message;
-                registerActive[connection.DestinationItemId].AddConnection(connection);
+                registerActive[connection.DestinationItemId].AddConnection(reverseConnection);
                 message += error.Message;
                 }
                 if (!error.IsError)
@@ -234,6 +242,7 @@ namespace BusinessLayer
                     message += error.Message;
                     error = dataService.UpdateItemActive(registerActive[connection.DestinationItemId]);
                     message += error.Message;
+                }
                 }
             }
             else

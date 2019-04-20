@@ -38,11 +38,11 @@ namespace PresentationLayer
         private readonly int maxPortNumber = 6;
 
         private readonly int maxPcNumber = 2;
-        private readonly int networkPCNumber = 5;
+        private readonly int networkPCNumber = 4;
 
-        private readonly int networkSize = 400;
+        private readonly int networkSize = 500;
 
-        private readonly int pathLength = 30;
+        private readonly int pathLength = 20;
 
         public int NetworkSize { get => networkSize; }
 
@@ -245,7 +245,7 @@ namespace PresentationLayer
         private void SetupConnection(int sourceItemId, int sourcePortNumber, 
             int destinationItemId, int destinationPortNumber)
         {
-            // létrehoz egy connection-t
+            // létrehoz egy connection-t és egy reverse connection-t
             IConnection connection = new Connection
             {
                 Name = "UTP kábel" + sourceItemId + "/" + sourcePortNumber
@@ -256,7 +256,17 @@ namespace PresentationLayer
                 DestinationPortNumber = destinationPortNumber
             };
 
-            frameWork.AddConnection(connection);
+            IConnection reverseConnection = new Connection
+            {
+                Name = "UTP kábel" + destinationItemId + "/" + destinationPortNumber + "/" 
+                    + sourceItemId + "/" + sourcePortNumber,
+                SourceItemId = destinationItemId,
+                SourcePortNumber = destinationPortNumber,
+                DestinationItemId = sourceItemId,
+                DestinationPortNumber = sourcePortNumber
+            };
+
+            frameWork.AddConnection(connection, reverseConnection);
         }
 
         private IPortActive SetupPort(int itemID, int portNumber)
@@ -289,7 +299,25 @@ namespace PresentationLayer
         private int SetupItem(int itemNumber, SymbolName itemType, string name)
         {
             int itemId = 0;
-            string deviceId = itemType == SymbolName.Router ? "router" : "pc";
+            string deviceId = "";
+            switch (itemType)
+            {
+                case SymbolName.Router:
+                    deviceId = "router";
+                    break;
+                case SymbolName.Switch:
+                    deviceId = "switch";
+                    break;
+                case SymbolName.Pc:
+                    deviceId = "pc";
+                    break;
+                default:
+                    deviceId = "router";
+                    break;
+            }
+
+            itemNumber++;
+
             IItemActive item = new ItemActive
             {
                 DeviceName = name + itemNumber,
