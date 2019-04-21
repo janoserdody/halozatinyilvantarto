@@ -184,6 +184,9 @@ namespace PresentationLayer.DrawingModule
             if (pathIndex % 2 == 0)
             {
             ItemPrintToScreen();
+            int index = 0;
+            portListBox.SelectedIndex = 0;
+            PrintPortToScreen(index);
             }
             else
             {
@@ -276,6 +279,11 @@ namespace PresentationLayer.DrawingModule
         private void portListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = portListBox.SelectedIndex;
+            PrintPortToScreen(index);
+        }
+
+        private void PrintPortToScreen(int index)
+        {
             if (index == -1)
             {
                 return;
