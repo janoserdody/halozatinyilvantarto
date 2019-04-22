@@ -1,18 +1,13 @@
-﻿using BusinessLayer.DrawingModule;
-using BusinessLayer.DrawingModule._interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 using BusinessLayer.Interfaces;
 using BusinessLayer.Support._interfaces;
 using Common;
 using Common.Interfaces;
 using PresentationLayer.DrawingModule._interfaces;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows.Forms;
-using static Common.Helpers;
 
 namespace PresentationLayer.DrawingModule
 {
