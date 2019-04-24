@@ -245,7 +245,7 @@ namespace PresentationLayer
         private void SetupConnection(int sourceItemId, int sourcePortNumber, 
             int destinationItemId, int destinationPortNumber)
         {
-            // létrehoz egy connection-t és egy reverse connection-t
+            // létrehoz egy connection-t
             IConnection connection = new Connection
             {
                 Name = "UTP kábel " + sourceItemId + "/" + sourcePortNumber
