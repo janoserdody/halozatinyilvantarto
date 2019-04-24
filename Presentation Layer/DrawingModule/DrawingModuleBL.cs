@@ -1,8 +1,6 @@
-﻿using BusinessLayer.DrawingModule;
-using BusinessLayer.Interfaces;
+﻿using BusinessLayer.Interfaces;
 using Common.Interfaces;
 using PresentationLayer.DrawingModule._interfaces;
-using static Common.Helpers;
 
 namespace PresentationLayer.DrawingModule
 {
@@ -31,8 +29,6 @@ namespace PresentationLayer.DrawingModule
                 halozat[connection.DestinationItemId, connection.SourceItemId] = 1;
             }
 
-            //int sourceNode = 101;
-            //int destinationNode = 103;
             printPath.Print(halozat, sourceNode, destinationNode);
         }
     }

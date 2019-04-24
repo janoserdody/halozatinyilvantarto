@@ -1,4 +1,8 @@
-﻿using BusinessLayer;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
+using BusinessLayer;
 using BusinessLayer.Interfaces;
 using BusinessLayer.Support._interfaces;
 using Common;
@@ -8,10 +12,6 @@ using LiteDB;
 using PresentationLayer.DrawingModule;
 using PresentationLayer.DrawingModule._interfaces;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
 using static Common.Helpers;
 
 namespace PresentationLayer
