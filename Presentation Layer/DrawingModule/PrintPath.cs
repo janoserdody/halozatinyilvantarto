@@ -41,8 +41,8 @@ namespace PresentationLayer.DrawingModule
             {
                 IItemActive source = frameWork.GetItemActive(sourceNode);
                 IItemActive destination = frameWork.GetItemActive(sourceNode);
-                MessageBox.Show("Nincs út " + source.DeviceName + source.DeviceID +
-                    " és " + destination.DeviceName + destination.DeviceID + " között!");
+                MessageBox.Show("Nincs út " + source.DeviceID +
+                    " és " + destination.DeviceID + " között!");
             }
             else
             {

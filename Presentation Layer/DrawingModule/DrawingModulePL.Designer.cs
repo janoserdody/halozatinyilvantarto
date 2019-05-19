@@ -132,6 +132,7 @@ namespace PresentationLayer.DrawingModule
             this.comboBoxSource.Name = "comboBoxSource";
             this.comboBoxSource.Size = new System.Drawing.Size(260, 28);
             this.comboBoxSource.TabIndex = 2;
+            this.comboBoxSource.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSource_KeyPress);
             // 
             // comboBoxDestination
             // 

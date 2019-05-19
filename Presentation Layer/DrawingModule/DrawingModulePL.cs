@@ -319,5 +319,13 @@ namespace PresentationLayer.DrawingModule
             ButtonClick();
             }
         }
+
+        private void comboBoxSource_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                ButtonClick();
+            }
+        }
     }
 }
