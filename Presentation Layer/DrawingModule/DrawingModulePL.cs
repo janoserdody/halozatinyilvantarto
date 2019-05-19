@@ -92,6 +92,7 @@ namespace PresentationLayer.DrawingModule
         {
             ImageLoad(x, y, image);
         }
+
          private void ImageLoad(int x, int y, Bitmap image)
         {
                 PictureBox pictureBox = new PictureBox();

@@ -1,6 +1,6 @@
 ﻿namespace PresentationLayer
 {
-    partial class Form1
+    partial class FrameWorkPL
     {
         /// <summary>
         /// Required designer variable.

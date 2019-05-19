@@ -16,10 +16,12 @@ using static Common.Helpers;
 
 namespace PresentationLayer
 {
-    public partial class Form1 : Form
+    public partial class FrameWorkPL : Form
     {
         // switch between MySQL or LiteDB
         private readonly bool isMySQL = false;
+
+        private Progress progressView;
 
         private IUIFactory uiFactory;
 
@@ -46,7 +48,7 @@ namespace PresentationLayer
 
         public int NetworkSize { get => networkSize; }
 
-        public Form1()
+        public FrameWorkPL()
         {
             eventMediator = new EventMediator();
             // feliratkozás az ErrorMessage Event-re
@@ -62,6 +64,10 @@ namespace PresentationLayer
             frameWork = factorySupport.Create(isMySQL, repo, eventMediator);
 
             drawingModulePL = new DrawingModulePL(uiFactory, frameWork, eventMediator);
+
+            int progressIndex = NetworkSize + networkPCNumber;
+
+            progressView = new Progress(progressIndex);
 
             InitializeComponent();
 
@@ -94,10 +100,9 @@ namespace PresentationLayer
             }
 
             // példa: kirajzol egy ábrát
-            ISymbol exampleSymbol = frameWork.GetSymbol(2);
-
-            pictureBox1.Image = exampleSymbol.GetImage();
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            //ISymbol exampleSymbol = frameWork.GetSymbol(2);
+            //pictureBox1.Image = exampleSymbol.GetImage();
+            //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             // példa: lekéri a GetService() -vel az IErrorservice szervízt
             // utána megjeleníti a hibaüzenetet
@@ -109,11 +114,11 @@ namespace PresentationLayer
                 throw new Exception("Hibás ErrorService!");
             }
 
-            IError error = new Error(ErrorType.InputError, "Példa a beviteli hibára");
+            IError error = new Error(ErrorType.InputError, "Példa üzenet a beviteli hibára");
             errorService.Write(error);
 
             // hibeüzenet 2. példa
-            IError errorExample2 = new Error(ErrorType.DatabaseError, "Példa: Adatbázis üzenet a datalayertől");
+            IError errorExample2 = new Error(ErrorType.DatabaseError, "Példa üzenet: Adatbázis üzenet a datalayertől");
             errorService.Write(errorExample2);
 
             this.Focus();
@@ -131,6 +136,7 @@ namespace PresentationLayer
 
         private void SetupNetwork()
         {
+            progressView.Show();
             rnd = new Random();
             SymbolName symbolName;
 
@@ -143,6 +149,8 @@ namespace PresentationLayer
                 int itemId = SetupItem(i, symbolName, "router");
 
                 itemIdList.Add(itemId);
+
+                progressView.Perform();
             }
 
             for (int i = 0; i < networkPCNumber; i++)
@@ -150,6 +158,9 @@ namespace PresentationLayer
                 int itemId = SetupItem(i, SymbolName.Pc, "PC");
 
                 pcList.Add(itemId);
+
+                progressView.Perform();
+
             }
 
             int actualPc;
@@ -240,6 +251,7 @@ namespace PresentationLayer
                     SetupConnection(actualRouter, (int)portSource, actualPc, (int)portDestination);
                 }
             }
+            progressView.Hide();
         }
 
         private void SetupConnection(int sourceItemId, int sourcePortNumber, 

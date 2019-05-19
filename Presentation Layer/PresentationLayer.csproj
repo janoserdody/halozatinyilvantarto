@@ -71,23 +71,32 @@
     <Compile Include="DrawingModule\DrawingModuleBL.cs" />
     <Compile Include="DrawingModule\FactorySupportDrawingModule.cs" />
     <Compile Include="DrawingModule\PrintPath.cs" />
+    <Compile Include="DrawingModule\Progress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DrawingModule\Progress.Designer.cs">
+      <DependentUpon>Progress.cs</DependentUpon>
+    </Compile>
     <Compile Include="DrawingModule\_interfaces\IDrawingModuleBL.cs" />
     <Compile Include="DrawingModule\_interfaces\IDrawingModulePL.cs" />
     <Compile Include="DrawingModule\_interfaces\IFactorySupportDrawingModule.cs" />
     <Compile Include="DrawingModule\_interfaces\IPrintPath.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FrameWorkPL.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FrameWorkPL.Designer.cs">
+      <DependentUpon>FrameWorkPL.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DrawingModule\DrawingModulePL.resx">
       <DependentUpon>DrawingModulePL.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="DrawingModule\Progress.resx">
+      <DependentUpon>Progress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrameWorkPL.resx">
+      <DependentUpon>FrameWorkPL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
