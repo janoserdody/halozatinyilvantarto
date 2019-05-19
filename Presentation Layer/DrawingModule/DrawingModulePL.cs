@@ -60,6 +60,8 @@ namespace PresentationLayer.DrawingModule
             eventMediator.ErrorMessage += OnErrorMessage;
 
             InitializeComponent();
+
+            errorLabel.Text = string.Empty;
         }
 
         private void InitializeItemList()
@@ -138,6 +140,11 @@ namespace PresentationLayer.DrawingModule
         }
        
         private void buttonPath_Click(object sender, EventArgs e)
+        {
+            ButtonClick();
+        }
+
+        private void ButtonClick()
         {
             string text = comboBoxDestination.Text;
 
@@ -303,6 +310,14 @@ namespace PresentationLayer.DrawingModule
             portMacAddressTextBox.Text = port.MacAddress;
 
             portIpAddressTextBox.Text = port.IPAddress;
+        }
+
+        private void comboBoxDestination_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+            ButtonClick();
+            }
         }
     }
 }

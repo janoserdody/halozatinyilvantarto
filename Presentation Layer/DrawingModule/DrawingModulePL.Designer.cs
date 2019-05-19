@@ -117,9 +117,9 @@ namespace PresentationLayer.DrawingModule
             this.errorLabel.Location = new System.Drawing.Point(1479, 14);
             this.errorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(51, 20);
+            this.errorLabel.Size = new System.Drawing.Size(111, 20);
             this.errorLabel.TabIndex = 1;
-            this.errorLabel.Text = "label1";
+            this.errorLabel.Text = "error message";
             // 
             // comboBoxSource
             // 
@@ -144,6 +144,7 @@ namespace PresentationLayer.DrawingModule
             this.comboBoxDestination.Name = "comboBoxDestination";
             this.comboBoxDestination.Size = new System.Drawing.Size(282, 28);
             this.comboBoxDestination.TabIndex = 3;
+            this.comboBoxDestination.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxDestination_KeyPress);
             // 
             // comboLabel1
             // 

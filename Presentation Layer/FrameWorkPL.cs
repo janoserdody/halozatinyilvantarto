@@ -71,6 +71,8 @@ namespace PresentationLayer
 
             InitializeComponent();
 
+            errorLabel.Text = string.Empty;
+
             InitializeRnd();
 
             // példa: lekéri a GetService() -vel a UIFactory szervízt
@@ -114,12 +116,13 @@ namespace PresentationLayer
                 throw new Exception("Hibás ErrorService!");
             }
 
-            IError error = new Error(ErrorType.InputError, "Példa üzenet a beviteli hibára");
-            errorService.Write(error);
+            // példa hibaüzenet
+            //IError error = new Error(ErrorType.InputError, "Példa üzenet a beviteli hibára");
+            //errorService.Write(error);
 
             // hibeüzenet 2. példa
-            IError errorExample2 = new Error(ErrorType.DatabaseError, "Példa üzenet: Adatbázis üzenet a datalayertől");
-            errorService.Write(errorExample2);
+            //IError errorExample2 = new Error(ErrorType.DatabaseError, "Példa üzenet: Adatbázis üzenet a datalayertől");
+            //errorService.Write(errorExample2);
 
             this.Focus();
         }
