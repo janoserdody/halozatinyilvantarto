@@ -72,7 +72,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayer\DijkstraTests.cs" />
     <Compile Include="BusinessLayer\FrameWorkTest.cs" />
+    <Compile Include="PresentationLayer\DrawingModuleBLTests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
