@@ -117,8 +117,8 @@ namespace PresentationLayer
             }
 
             // példa hibaüzenet
-            //IError error = new Error(ErrorType.InputError, "Példa üzenet a beviteli hibára");
-            //errorService.Write(error);
+            IError error = new Error(ErrorType.InputError, " ");
+            errorService.Write(error);
 
             // hibeüzenet 2. példa
             //IError errorExample2 = new Error(ErrorType.DatabaseError, "Példa üzenet: Adatbázis üzenet a datalayertől");
