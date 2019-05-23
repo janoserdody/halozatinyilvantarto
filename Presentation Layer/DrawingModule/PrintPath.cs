@@ -40,7 +40,7 @@ namespace PresentationLayer.DrawingModule
             if (path == null)
             {
                 IItemActive source = frameWork.GetItemActive(sourceNode);
-                IItemActive destination = frameWork.GetItemActive(sourceNode);
+                IItemActive destination = frameWork.GetItemActive(destinationNode);
                 MessageBox.Show("Nincs út " + source.DeviceID +
                     " és " + destination.DeviceID + " között!");
             }
